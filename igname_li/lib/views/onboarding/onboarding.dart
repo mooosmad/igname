@@ -1,87 +1,144 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
-import 'package:onboarding_screen/onboarding_screen.dart';
+import 'package:get/get.dart';
+import 'package:igname_li/theme/choosetheme.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class Onboarding extends StatelessWidget {
-  Onboarding({Key? key}) : super(key: key);
+class OnBoarding extends StatefulWidget {
+  const OnBoarding({Key? key}) : super(key: key);
 
-  final PageController _controller = PageController();
+  @override
+  State<OnBoarding> createState() => _OnBoardingState();
+}
 
-  final List<_SliderModel> mySlides = [
-    _SliderModel(
-      imageAssetPath: Image.asset(
-        'assets/images/delivery.png',
-        scale: 1,
-        fit: BoxFit.cover,
-      ),
-      title: 'Developer Student Club',
-      desc: 'discover people',
-      minTitleFontSize: 10,
-      descStyle: const TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.w400,
-        color: Colors.black,
-      ),
-      titleStyle: const TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.w400,
-        color: Colors.black,
-      ),
-    ),
-    _SliderModel(
-      imageAssetPath: Image.asset('assets/images/looking-at-start.png'),
-      title: 'Developer Student Club',
-      desc: 'discover people',
-      descStyle: const TextStyle(),
-      titleStyle: const TextStyle(),
-    ),
-    _SliderModel(
-      imageAssetPath: Image.asset('assets/images/security-system.png'),
-      title: 'Developer Student Club',
-      desc: 'discover people',
-      descStyle: const TextStyle(),
-      titleStyle: const TextStyle(),
-    ),
-  ];
+class _OnBoardingState extends State<OnBoarding> {
+  PageController controller = PageController();
 
   @override
   Widget build(BuildContext context) {
-    return OnBoardingScreen(
-      /// This [mySlides] must not be more than 5.
-      mySlides: mySlides,
-      controller: _controller,
-      slideIndex: 0,
-      statusBarColor: Colors.red,
-      startGradientColor: const Color(0xfffdc72f),
-      endGradientColor: Colors.white,
-      skipStyle: const TextStyle(color: Colors.white),
-      pageIndicatorColorList: const [
-        Colors.black,
-        Colors.black,
-        Colors.black,
-      ],
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      // bottomNavigationBar: Container(
+      //   height: 50,
+      //   // color: Colors.white,
+      // ),
+      bottomSheet: Container(
+        padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+        height: 70,
+        child: Center(
+          child: SmoothPageIndicator(
+            controller: controller, // PageController
+            count: 3,
+            effect: const ScrollingDotsEffect(
+              // expansionFactor: 2.2,
+              dotColor: Colors.black,
+              activeDotColor: Colors.white,
+              dotWidth: 15,
+              dotHeight: 5,
+              spacing: 5,
+            ),
+          ),
+        ),
+      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     if (controller.page!.toInt() == 2) {
+      //       //next page
+      //       Get.to(
+      //         const ChooseThemePage(),
+      //         transition: Transition.cupertino,
+      //         duration: const Duration(milliseconds: 900),
+      //         popGesture: true,
+      //       );
+      //     } else {
+      //       controller.nextPage(
+      //         duration: const Duration(milliseconds: 600),
+      //         curve: Curves.easeIn,
+      //       );
+      //     }
+      //   },
+      //   child: const Icon(Icons.arrow_forward_rounded),
+      // ),
+      appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: TextButton(
+              onPressed: () {
+                Get.to(
+                  const ChooseThemePage(),
+                  transition: Transition.cupertino,
+                  duration: const Duration(milliseconds: 900),
+                  popGesture: true,
+                );
+              },
+              child: Text(
+                "passer",
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+            ),
+          ),
+        ],
+      ),
+      body: PageView(
+        physics: const BouncingScrollPhysics(),
+        children: [
+          const OnBoardingPage(
+            asset: "assets/images/delivery.png",
+            title: "Faites livrer tous vos colis en un clic",
+            description: "Faite livrer tous vos colis en un clic",
+          ),
+          const OnBoardingPage(
+            asset: "assets/images/preview.png",
+            title:
+                "Gardez toujours un oeil sur vos articles en cours de livraison",
+            description: "onboardDescription2",
+          ),
+          const OnBoardingPage(
+            asset: "assets/images/rectangle.png",
+            title: "onboardTitle3",
+            description: "onboardDescription3",
+          ),
+        ],
+        controller: controller,
+      ),
     );
   }
 }
 
-class _SliderModel {
-  const _SliderModel({
-    required this.imageAssetPath,
-    this.title = "title",
-    this.desc = "title",
-    // ignore: unused_element
-    this.miniDescFontSize = 12.0,
-    this.minTitleFontSize = 15.0,
-    required this.descStyle,
-    required this.titleStyle,
-  });
+class OnBoardingPage extends StatelessWidget {
+  final String? asset;
+  final String? title;
+  final String? description;
 
-  final Image imageAssetPath;
-  final String title;
-  final TextStyle titleStyle;
-  final double minTitleFontSize;
-  final String desc;
-  final TextStyle descStyle;
-  final double miniDescFontSize;
+  const OnBoardingPage({Key? key, this.asset, this.title, this.description})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: const Color(0xfffdc72f),
+      child: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(8),
+            child: Text(
+              title!,
+              textAlign: TextAlign.start,
+              style: Theme.of(context).textTheme.headline1,
+            ),
+          ),
+          Image.asset(
+            asset!,
+            fit: BoxFit.cover,
+            // repeat: false,
+          ),
+          // Container(
+          //   color: const Color(0xfffdc72f),
+          //   height: 50,
+          // ),
+        ],
+      ),
+    );
+  }
 }
