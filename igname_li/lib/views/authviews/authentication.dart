@@ -63,8 +63,7 @@ class AuthenticationPage extends StatelessWidget {
                 OutlinedButton(
                   onPressed: () {},
                   style: OutlinedButton.styleFrom(
-                    backgroundColor:
-                        Get.isDarkMode ? Colors.transparent : Colors.black,
+                    backgroundColor: Colors.transparent,
                     elevation: 1,
                     // shape: RoundedRectangleBorder(
                     //   borderRadius: BorderRadius.circular(5.0),
@@ -74,7 +73,7 @@ class AuthenticationPage extends StatelessWidget {
                   child: Text(
                     "Je connecte",
                     style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                          color: Get.isDarkMode ? Colors.white : Colors.black,
+                          color: Colors.white,
                         ),
                   ),
                 ),
