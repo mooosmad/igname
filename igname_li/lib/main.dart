@@ -1,7 +1,10 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:igname_li/theme/theme.dart';
+import 'package:igname_li/views/authviews/authentication.dart';
 import 'package:igname_li/views/onboarding/onboarding.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 late bool isFirst;
@@ -43,7 +46,45 @@ class MyApp extends StatelessWidget {
       themeMode: getThemeActuel(),
       theme: ThemeIgname.ligthTheme,
       darkTheme: ThemeIgname.darkTheme,
-      home: const OnBoarding(),
+      home: MySplashScreen(),
+    );
+  }
+}
+
+class MySplashScreen extends StatefulWidget {
+  const MySplashScreen({Key? key}) : super(key: key);
+
+  @override
+  State<MySplashScreen> createState() => _MySplashScreenState();
+}
+
+class _MySplashScreenState extends State<MySplashScreen> {
+  // // bool? isFirst;
+  // bool? isConnect;
+  // Future getFirt() async {
+  //   // isConnect = await Util().isConnected();
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   if (mounted) {
+  //     setState(() {
+  //       isFirst = prefs.getBool("isFirst") ?? true;
+  //     });
+  //   }
+  // }
+
+  // @override
+  // void initState() {
+  //   getFirt();
+  //   super.initState();
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSplashScreen(
+      splash: 'assets/images/logo.png',
+      splashIconSize: 250,
+      backgroundColor: Get.isDarkMode ? Colors.black : Colors.white,
+      nextScreen: isFirst ? const OnBoarding() : const AuthenticationPage(),
+      splashTransition: SplashTransition.slideTransition,
     );
   }
 }

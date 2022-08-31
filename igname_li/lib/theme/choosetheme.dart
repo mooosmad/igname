@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:igname_li/views/authviews/authentication.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,6 +30,8 @@ class _ChooseThemePageState extends State<ChooseThemePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           changeTheme(Get.isDarkMode);
+
+          Get.off(const AuthenticationPage());
         },
         child: const Icon(Icons.arrow_forward_rounded),
       ),
@@ -39,7 +42,7 @@ class _ChooseThemePageState extends State<ChooseThemePage> {
             SizedBox(
               height: MediaQuery.of(context).size.height / 2,
               child: Lottie.asset(
-                "assets/lotties/104639-lottie-dark-mode.json",
+                "assets/lotties/darkmode.json",
                 frameBuilder: ((context, child, composition) {
                   return composition != null
                       ? child
@@ -51,13 +54,13 @@ class _ChooseThemePageState extends State<ChooseThemePage> {
               ),
             ),
             Text(
-              "chooseThemeTitle",
+              "Mode Sombre",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyText1,
             ),
             const SizedBox(height: 10),
             Text(
-              "chooseThemeDescription",
+              "Choisissez le theme qui vous combien le mieux",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyText2!.copyWith(
                     color: Colors.grey,
@@ -78,7 +81,10 @@ class _ChooseThemePageState extends State<ChooseThemePage> {
                   Expanded(
                     child: Row(
                       children: const [
-                        Icon(Icons.dark_mode),
+                        Icon(
+                          Icons.dark_mode,
+                          color: Color(0xfffdc72f),
+                        ),
                         SizedBox(width: 10),
                         Text(
                           "Mode Sombre",

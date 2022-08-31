@@ -59,11 +59,15 @@ class _OnBoardingState extends State<OnBoarding> {
       //   child: const Icon(Icons.arrow_forward_rounded),
       // ),
       appBar: AppBar(
+        backgroundColor: const Color(0xfffdc72f),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20),
             child: TextButton(
               onPressed: () {
+                // setState(() {
+                //   isFirst == true;
+                // });
                 Get.to(
                   const ChooseThemePage(),
                   transition: Transition.cupertino,
@@ -73,7 +77,9 @@ class _OnBoardingState extends State<OnBoarding> {
               },
               child: Text(
                 "passer",
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                      color: Get.isDarkMode ? Colors.black : Colors.white,
+                    ),
               ),
             ),
           ),
@@ -119,19 +125,21 @@ class OnBoardingPage extends StatelessWidget {
       color: const Color(0xfffdc72f),
       child: Column(
         children: [
+          Image.asset(
+            asset!,
+            fit: BoxFit.cover,
+            // repeat: false,
+          ),
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(8),
             child: Text(
               title!,
-              textAlign: TextAlign.start,
-              style: Theme.of(context).textTheme.headline1,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headline2!.copyWith(
+                    color: Get.isDarkMode ? Colors.black : Colors.white,
+                  ),
             ),
-          ),
-          Image.asset(
-            asset!,
-            fit: BoxFit.cover,
-            // repeat: false,
           ),
           // Container(
           //   color: const Color(0xfffdc72f),
