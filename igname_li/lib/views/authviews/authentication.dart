@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:igname_li/views/authviews/signup.dart';
 
 class AuthenticationPage extends StatelessWidget {
   const AuthenticationPage({Key? key}) : super(key: key);
@@ -40,7 +41,9 @@ class AuthenticationPage extends StatelessWidget {
             Column(
               children: [
                 OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(const Signup());
+                  },
                   style: OutlinedButton.styleFrom(
                     backgroundColor:
                         Get.isDarkMode ? Colors.white : Colors.black,
@@ -63,17 +66,18 @@ class AuthenticationPage extends StatelessWidget {
                 OutlinedButton(
                   onPressed: () {},
                   style: OutlinedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
+                    backgroundColor:
+                        Get.isDarkMode ? Colors.transparent : Colors.white,
                     elevation: 1,
-                    // shape: RoundedRectangleBorder(
-                    //   borderRadius: BorderRadius.circular(5.0),
-                    // ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                        side: const BorderSide(color: Colors.red, width: 10.0)),
                     fixedSize: const Size(350, 50),
                   ),
                   child: Text(
-                    "Je connecte",
+                    "Je me connecte",
                     style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                          color: Colors.white,
+                          color: Get.isDarkMode ? Colors.white : Colors.black,
                         ),
                   ),
                 ),

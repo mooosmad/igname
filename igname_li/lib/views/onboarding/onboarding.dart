@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:igname_li/main.dart';
 import 'package:igname_li/theme/choosetheme.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -39,35 +40,14 @@ class _OnBoardingState extends State<OnBoarding> {
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     if (controller.page!.toInt() == 2) {
-      //       //next page
-      //       Get.to(
-      //         const ChooseThemePage(),
-      //         transition: Transition.cupertino,
-      //         duration: const Duration(milliseconds: 900),
-      //         popGesture: true,
-      //       );
-      //     } else {
-      //       controller.nextPage(
-      //         duration: const Duration(milliseconds: 600),
-      //         curve: Curves.easeIn,
-      //       );
-      //     }
-      //   },
-      //   child: const Icon(Icons.arrow_forward_rounded),
-      // ),
+
       appBar: AppBar(
         backgroundColor: const Color(0xfffdc72f),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20),
-            child: TextButton(
+            child: IconButton(
               onPressed: () {
-                // setState(() {
-                //   isFirst == true;
-                // });
                 Get.to(
                   const ChooseThemePage(),
                   transition: Transition.cupertino,
@@ -75,11 +55,10 @@ class _OnBoardingState extends State<OnBoarding> {
                   popGesture: true,
                 );
               },
-              child: Text(
-                "passer",
-                style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                      color: Get.isDarkMode ? Colors.black : Colors.white,
-                    ),
+              icon: Icon(
+                Icons.cancel_outlined,
+                color: Get.isDarkMode ? Colors.black : Colors.white,
+                size: 30,
               ),
             ),
           ),
@@ -101,7 +80,7 @@ class _OnBoardingState extends State<OnBoarding> {
           ),
           const OnBoardingPage(
             asset: "assets/images/rectangle.png",
-            title: "onboardTitle3",
+            title: "Recevez toutes vos commandes en toute sérénité",
             description: "onboardDescription3",
           ),
         ],
@@ -124,15 +103,17 @@ class OnBoardingPage extends StatelessWidget {
     return Container(
       color: const Color(0xfffdc72f),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Image.asset(
             asset!,
             fit: BoxFit.cover,
+
             // repeat: false,
           ),
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(12),
             child: Text(
               title!,
               textAlign: TextAlign.center,

@@ -64,7 +64,7 @@ class ThemeIgname {
     ),
   );
   static final darkTheme = ThemeData.dark().copyWith(
-    scaffoldBackgroundColor: Color.fromARGB(255, 29, 29, 30),
+    scaffoldBackgroundColor: const Color.fromARGB(255, 29, 29, 30),
     radioTheme: RadioThemeData(
       fillColor: MaterialStateProperty.all(const Color(0xff7b61ff)),
     ),

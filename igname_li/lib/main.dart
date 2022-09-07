@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       themeMode: getThemeActuel(),
       theme: ThemeIgname.ligthTheme,
       darkTheme: ThemeIgname.darkTheme,
-      home: MySplashScreen(),
+      home: const MySplashScreen(),
     );
   }
 }
@@ -59,24 +59,6 @@ class MySplashScreen extends StatefulWidget {
 }
 
 class _MySplashScreenState extends State<MySplashScreen> {
-  // // bool? isFirst;
-  // bool? isConnect;
-  // Future getFirt() async {
-  //   // isConnect = await Util().isConnected();
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   if (mounted) {
-  //     setState(() {
-  //       isFirst = prefs.getBool("isFirst") ?? true;
-  //     });
-  //   }
-  // }
-
-  // @override
-  // void initState() {
-  //   getFirt();
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
