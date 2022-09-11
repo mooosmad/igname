@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:igname_li/main.dart';
 import 'package:igname_li/theme/choosetheme.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -56,7 +55,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 );
               },
               icon: Icon(
-                Icons.cancel_outlined,
+                Icons.cancel,
                 color: Get.isDarkMode ? Colors.black : Colors.white,
                 size: 30,
               ),
@@ -66,25 +65,25 @@ class _OnBoardingState extends State<OnBoarding> {
       ),
       body: PageView(
         physics: const BouncingScrollPhysics(),
-        children: [
-          const OnBoardingPage(
+        controller: controller,
+        children: const [
+          OnBoardingPage(
             asset: "assets/images/delivery.png",
             title: "Faites livrer tous vos colis en un clic",
             description: "Faite livrer tous vos colis en un clic",
           ),
-          const OnBoardingPage(
+          OnBoardingPage(
             asset: "assets/images/preview.png",
             title:
                 "Gardez toujours un oeil sur vos articles en cours de livraison",
             description: "onboardDescription2",
           ),
-          const OnBoardingPage(
+          OnBoardingPage(
             asset: "assets/images/rectangle.png",
             title: "Recevez toutes vos commandes en toute sérénité",
             description: "onboardDescription3",
           ),
         ],
-        controller: controller,
       ),
     );
   }
@@ -108,12 +107,10 @@ class OnBoardingPage extends StatelessWidget {
           Image.asset(
             asset!,
             fit: BoxFit.cover,
-
-            // repeat: false,
           ),
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(16),
             child: Text(
               title!,
               textAlign: TextAlign.center,
@@ -122,10 +119,6 @@ class OnBoardingPage extends StatelessWidget {
                   ),
             ),
           ),
-          // Container(
-          //   color: const Color(0xfffdc72f),
-          //   height: 50,
-          // ),
         ],
       ),
     );

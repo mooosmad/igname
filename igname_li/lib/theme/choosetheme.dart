@@ -32,7 +32,7 @@ class _ChooseThemePageState extends State<ChooseThemePage> {
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             final prefs = await SharedPreferences.getInstance();
-            prefs.setBool('isFisrt', false);
+            prefs.setBool('isFirst', false);
             changeTheme(Get.isDarkMode);
             Get.off(const AuthenticationPage());
           },
@@ -82,12 +82,10 @@ class _ChooseThemePageState extends State<ChooseThemePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        // setState(() {
-                        //   isdarkmode = v;
-                        // });
+                    // GestureDetector(
 
+                    OutlinedButton(
+                      onPressed: () {
                         Get.changeThemeMode(
                           Get.isDarkMode ? ThemeMode.light : ThemeMode.dark,
                         );
@@ -100,65 +98,53 @@ class _ChooseThemePageState extends State<ChooseThemePage> {
                                 const BorderRadius.all(Radius.circular(12)),
                             border: Border.all(
                               color: Colors.white,
-                              width: 8,
+                              width: 2.5,
                             )),
                         height: 180,
                         width: 80,
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Container(
-                              height: 60,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(5)),
-                                color: Colors.grey,
-                              ),
-                            ),
-                            Container(color: Colors.white, height: 5),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                                color: Colors.grey,
-                              ),
-                              height: 50,
-                            ),
-                            Container(
-                              height: 10,
+                            const Icon(
+                              Icons.light_mode,
                               color: Colors.white,
                             ),
+                            Text("Aa",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline1!
+                                    .copyWith(color: Colors.white)),
                           ],
                         ),
                       ),
                     ),
+
                     Container(
                       margin: const EdgeInsets.all(16),
                       height: 180,
                       width: 80,
                       decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(12)),
-                          border: Border.all(
-                            color: Colors.black38,
-                            width: 8,
-                          )),
+                        color: Colors.black26,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 2.5,
+                        ),
+                      ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Container(
-                            height: 60,
+                          const Icon(
+                            Icons.dark_mode,
                             color: Colors.black,
                           ),
-                          Container(color: Colors.grey, height: 5),
-                          Container(
-                            height: 50,
-                            color: Colors.black,
-                          ),
-                          Container(
-                            height: 5,
-                            color: Colors.grey,
+                          Text(
+                            "Aa",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline1!
+                                .copyWith(color: Colors.black),
                           ),
                         ],
                       ),
