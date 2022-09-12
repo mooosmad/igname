@@ -1,10 +1,13 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:igname_li/model/user.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class APIservices {
-  String serverUrl = "https://iwadeli.herokuapp.com/api/";
+  String serverUrl = "https://iwadeli.herokuapp.com/api";
   var status;
 
   var token;
@@ -28,33 +31,34 @@ class APIservices {
     }
   }
 
-  registerUser(String nom, String prenom, String contact, String password,
-      String email) async {
+  Future<List<dynamic>?> registerUser(User usermodel) async {
     String myUrl = "$serverUrl/register";
-    final response = await http.post(
-      Uri.parse(myUrl),
-      headers: {'Accept': 'application/json'},
-      body: {
-        "nom": "$nom",
-        "prenom": "$prenom",
-        "email": "$email",
-        "contact": "$contact",
-        "password": "$password"
-      },
-    );
+    List<dynamic>? check;
+    final response = await http.post(Uri.parse(myUrl),
+        headers: {'Accept': 'application/json'}, body: usermodel.toJson()
+        // {
+        //   "nom": "$nom",
+        //   "prenom": "$prenom",
+        //   "contact": "$contact",
+        //   "password": "$password"
+        // },
+        );
     status = response.body.contains('error');
 
     var data = json.decode(response.body);
 
     if (status == 201) {
       print('data : ${data["token"]}');
+      check = [true, "reussi"];
+      // var box = await Hive.openBox<User>('boxUser');
       _save(data["token"]);
       //
     } else {
       print('data : ${data["error"]}');
+      check = [false, '${data["error"]}'];
       Fluttertoast.showToast(msg: "${data["error"]}");
     }
-    // return succes;
+    // return check;
   }
 
   _save(String token) async {

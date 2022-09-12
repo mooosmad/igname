@@ -18,18 +18,22 @@ class Background extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
+          // Positioned(
+          //   top: 50,
+          //   right: 30,
+          //   child: Image.asset("assets/images/deliwa.JPG",
+          //       width: size.width * 0.4),
+          // ),
           Positioned(
-            top: 50,
-            right: 30,
-            child: Image.asset("assets/images/deliwa.JPG",
-                width: size.width * 0.4),
-          ),
-          Positioned(
-            top: 70,
+            // top: 10,
             // bottom: 20,
+            left: 0,
             right: 0,
-            child: Image.asset("assets/images/deliwa.JPG",
-                width: size.width, fit: BoxFit.cover),
+            child: Image.asset(
+              "assets/images/deliwa2.jpg",
+              // width: size.width,
+              fit: BoxFit.fill,
+            ),
           ),
           BackdropFilter(
               filter: ui.ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),

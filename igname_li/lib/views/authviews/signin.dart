@@ -114,7 +114,7 @@ class Signin extends StatelessWidget {
                       // );
                     },
                     child: Text(
-                      "Je n'ai pas de compte Je m'inscris",
+                      "Je n'ai pas de compte, Je m'inscris",
                       style: Theme.of(context)
                           .textTheme
                           .bodyText2!
