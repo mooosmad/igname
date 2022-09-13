@@ -303,7 +303,7 @@ class _SignupState extends State<Signup> {
                               password: password.text,
                             );
 
-                            APIservices().registerUser(usermodel).then() {
+                            APIservices().registerUser(usermodel).then((check) {
                               // if ret[0] is true reussi
                               if (check![0]) {
                                 Fluttertoast.showToast(
@@ -314,7 +314,7 @@ class _SignupState extends State<Signup> {
                               }
                             });
                           } else {
-                            print("noo valide");
+                            print("non valide");
                           }
                         },
                         style: OutlinedButton.styleFrom(
@@ -356,7 +356,7 @@ class _SignupState extends State<Signup> {
                                     fontWeight: FontWeight.bold),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
