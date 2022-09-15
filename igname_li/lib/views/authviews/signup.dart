@@ -42,19 +42,19 @@ class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "INSCRIPTION",
-          style: Theme.of(context).textTheme.bodyText1,
-        ),
-        leading: const SizedBox(width: 0),
-        elevation: 0,
-        centerTitle: true,
-      ),
-      body: load
-          ? const Loading()
-          : SafeArea(
+    return load
+        ? const Loading()
+        : Scaffold(
+            appBar: AppBar(
+              title: Text(
+                "INSCRIPTION",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              leading: const SizedBox(width: 0),
+              elevation: 0,
+              centerTitle: true,
+            ),
+            body: SafeArea(
               child: SingleChildScrollView(
                 child: Background(
                   child: Form(
@@ -314,7 +314,9 @@ class _SignupState extends State<Signup> {
                                   .registerUser(nom.text, prenom.text,
                                       contact.text, password.text)
                                   .then((check) {
-                                // if ret[0] is true reussi
+                                setState(() {
+                                  load = false;
+                                });
                                 if (check![0]) {
                                   Fluttertoast.showToast(
                                       msg: "Inscription effectué avec succés");
@@ -375,6 +377,6 @@ class _SignupState extends State<Signup> {
                 ),
               ),
             ),
-    );
+          );
   }
 }

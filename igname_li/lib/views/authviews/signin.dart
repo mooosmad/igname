@@ -30,19 +30,19 @@ class _SigninState extends State<Signin> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "CONNEXION",
-          style: Theme.of(context).textTheme.bodyText1,
-        ),
-        leading: const SizedBox(width: 0),
-        elevation: 0,
-        centerTitle: true,
-      ),
-      body: load
-          ? const Loading()
-          : SafeArea(
+    return load
+        ? const Loading()
+        : Scaffold(
+            appBar: AppBar(
+              title: Text(
+                "CONNEXION",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              leading: const SizedBox(width: 0),
+              elevation: 0,
+              centerTitle: true,
+            ),
+            body: SafeArea(
               child: SingleChildScrollView(
                 child: Background(
                   child: Form(
@@ -137,10 +137,9 @@ class _SigninState extends State<Signin> {
                         OutlinedButton(
                           onPressed: () {
                             if (formGlobalKey.currentState!.validate()) {
-                              // setState(() {
-                              //   load == true;
-                              // });
-                              Loading();
+                              setState(() {
+                                load = true;
+                              });
                               // User usermodel = User(
                               //   nom: nom.text,
                               //   prenom: prenom.text,
@@ -150,6 +149,9 @@ class _SigninState extends State<Signin> {
                               APIservices()
                                   .loginUser(contact.text, password.text)
                                   .then((check) {
+                                setState(() {
+                                  load = false;
+                                });
                                 if (check![0]) {
                                   Fluttertoast.showToast(
                                       msg: "Connexion reussi");
@@ -210,6 +212,6 @@ class _SigninState extends State<Signin> {
                 ),
               ),
             ),
-    );
+          );
   }
 }

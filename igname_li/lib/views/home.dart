@@ -16,30 +16,36 @@ class _HomeState extends State<Home> {
   bool load = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          const Center(
-            child: Text("Bienvenue"),
-          ),
-          TextButton(
-            onPressed: () {
-              APIservices().logout().then((check) {
-                // if ret[0] is true reussi
-                if (check![0]) {
-                  // setState(() {
-                  //   load == true;
-                  // });
-                  const Loading();
-                  Fluttertoast.showToast(msg: "Deconnexion effectué");
-                  Get.to(CheckAuth());
-                }
-              });
-            },
-            child: const Text("Deconnexion"),
-          ),
-        ]),
-      ),
-    );
+    return load
+        ? const Loading()
+        : Scaffold(
+            body: SafeArea(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Center(
+                      child: Text("Bienvenue"),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          load = true;
+                        });
+                        APIservices().logout().then((check) {
+                          setState(() {
+                            load = false;
+                          });
+                          if (check![0]) {
+                            const Loading();
+                            Fluttertoast.showToast(msg: "Deconnexion effectué");
+                            Get.to(CheckAuth());
+                          }
+                        });
+                      },
+                      child: const Text("Deconnexion"),
+                    ),
+                  ]),
+            ),
+          );
   }
 }
