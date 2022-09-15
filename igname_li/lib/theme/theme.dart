@@ -16,11 +16,16 @@ class ThemeIgname {
       foregroundColor: Colors.black,
       elevation: 0,
     ),
+    iconTheme: const IconThemeData(
+      color: Color(0xfffdc72f),
+    ),
     bottomSheetTheme: const BottomSheetThemeData(
       backgroundColor: Colors.transparent,
     ),
     radioTheme: RadioThemeData(
-      fillColor: MaterialStateProperty.all(const Color(0xff7b61ff)),
+      fillColor: MaterialStateProperty.all(
+        const Color(0xfffdc72f),
+      ),
     ),
     dialogTheme: const DialogTheme(
       contentTextStyle: TextStyle(
@@ -66,7 +71,7 @@ class ThemeIgname {
   static final darkTheme = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: const Color.fromARGB(255, 29, 29, 30),
     radioTheme: RadioThemeData(
-      fillColor: MaterialStateProperty.all(const Color(0xff7b61ff)),
+      fillColor: MaterialStateProperty.all(const Color(0xfffdc72f)),
     ),
     dialogBackgroundColor: const Color.fromARGB(255, 36, 36, 41),
     appBarTheme: const AppBarTheme(
@@ -90,13 +95,16 @@ class ThemeIgname {
     ),
     cardTheme: const CardTheme(color: Color.fromARGB(255, 36, 36, 41)),
     colorScheme: const ColorScheme.dark().copyWith(
-      primary: const Color(0xff7b61ff),
+      primary: const Color(0xfffdc72f),
       onPrimary: Colors.white,
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Colors.transparent,
       foregroundColor: Colors.white,
       elevation: 0,
+    ),
+    iconTheme: const IconThemeData(
+      color: Color(0xfffdc72f),
     ),
     bottomSheetTheme: const BottomSheetThemeData(
       backgroundColor: Colors.transparent,

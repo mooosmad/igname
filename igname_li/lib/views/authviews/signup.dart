@@ -93,7 +93,7 @@ class _SignupState extends State<Signup> {
                             hintStyle:
                                 Theme.of(context).textTheme.bodyText2!.copyWith(
                                       color: Get.isDarkMode
-                                          ? Colors.black
+                                          ? Colors.white
                                           : Colors.white,
                                     ),
                           ),
@@ -133,7 +133,7 @@ class _SignupState extends State<Signup> {
                             hintStyle:
                                 Theme.of(context).textTheme.bodyText2!.copyWith(
                                       color: Get.isDarkMode
-                                          ? Colors.black
+                                          ? Colors.white
                                           : Colors.white,
                                     ),
                           ),
@@ -174,7 +174,7 @@ class _SignupState extends State<Signup> {
                             hintStyle:
                                 Theme.of(context).textTheme.bodyText2!.copyWith(
                                       color: Get.isDarkMode
-                                          ? Colors.black
+                                          ? Colors.white
                                           : Colors.white,
                                     ),
                           ),
@@ -216,7 +216,7 @@ class _SignupState extends State<Signup> {
                             hintStyle:
                                 Theme.of(context).textTheme.bodyText2!.copyWith(
                                       color: Get.isDarkMode
-                                          ? Colors.black
+                                          ? Colors.white
                                           : Colors.white,
                                     ),
                             suffixIcon: GestureDetector(
@@ -269,7 +269,7 @@ class _SignupState extends State<Signup> {
                             hintStyle:
                                 Theme.of(context).textTheme.bodyText2!.copyWith(
                                       color: Get.isDarkMode
-                                          ? Colors.black
+                                          ? Colors.white
                                           : Colors.white,
                                     ),
                             suffixIcon: GestureDetector(
