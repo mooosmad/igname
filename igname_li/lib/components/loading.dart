@@ -7,9 +7,14 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child:
-            Lottie.asset("assets/lotties/layer.json", height: 200, width: 200),
+      body: Container(
+        child: Center(
+          child: Lottie.asset(
+            "assets/lotties/loader.json",
+            width: 300,
+            height: 300,
+          ),
+        ),
       ),
     );
   }

@@ -1,8 +1,10 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:igname_li/components/loading.dart';
 import 'package:igname_li/theme/theme.dart';
 import 'package:igname_li/views/authviews/authentication.dart';
+import 'package:igname_li/views/home.dart';
 import 'package:igname_li/views/onboarding/onboarding.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +16,7 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   String? theme = prefs.getString('theme') ?? 'dark';
   isFirst = prefs.getBool('isFirst') ?? true;
+
   runApp(MyApp(
     theme: theme,
   ));
@@ -36,12 +39,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      // initialBinding: AllControllerBinding(),
       title: "Iwa",
-      // translations: MyTranslation(),
       locale: Get.deviceLocale,
-      // fallbackLocale: Locale("fr", "FR"),
-      // si la langue du telephone n'est pas definis dans ma classe
       debugShowCheckedModeBanner: false,
       themeMode: getThemeActuel(),
       theme: ThemeIgname.ligthTheme,
@@ -51,22 +50,60 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MySplashScreen extends StatefulWidget {
+class MySplashScreen extends StatelessWidget {
   const MySplashScreen({Key? key}) : super(key: key);
 
-  @override
-  State<MySplashScreen> createState() => _MySplashScreenState();
-}
-
-class _MySplashScreenState extends State<MySplashScreen> {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       splash: 'assets/images/logo.png',
       splashIconSize: 250,
       backgroundColor: Get.isDarkMode ? Colors.black : Colors.white,
-      nextScreen: isFirst ? const OnBoarding() : const AuthenticationPage(),
+      nextScreen: CheckAuth(),
+      //  isFirst ? const OnBoarding() : const AuthenticationPage(),
       splashTransition: SplashTransition.slideTransition,
+    );
+  }
+}
+
+class CheckAuth extends StatefulWidget {
+  @override
+  _CheckAuthState createState() => _CheckAuthState();
+}
+
+class _CheckAuthState extends State<CheckAuth> {
+  bool isAuth = false;
+
+  @override
+  void initState() {
+    _checkIfLoggedIn();
+    super.initState();
+  }
+
+  void _checkIfLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('access_token');
+    if (token != null) {
+      setState(() {
+        isAuth = true;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Widget child;
+    if (isAuth) {
+      child = Home();
+    } else {
+      if (isFirst) {
+        child = const OnBoarding();
+      } else {
+        child = const AuthenticationPage();
+      }
+    }
+    return Scaffold(
+      body: child,
     );
   }
 }

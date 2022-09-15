@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:igname_li/components/background.dart';
 import 'package:igname_li/components/loading.dart';
-import 'package:igname_li/model/user.dart';
 import 'package:igname_li/services/api_services.dart';
 import 'package:igname_li/views/authviews/authentication.dart';
 import 'package:igname_li/views/authviews/signin.dart';
@@ -295,22 +294,24 @@ class _SignupState extends State<Signup> {
                             setState(() {
                               load = true;
                             });
-
-                            User usermodel = User(
-                              nom: nom.text,
-                              prenom: prenom.text,
-                              contact: contact.text,
-                              password: password.text,
-                            );
-
-                            APIservices().registerUser(usermodel).then((check) {
+                            // User usermodel = User(
+                            //   nom: nom.text,
+                            //   prenom: prenom.text,
+                            //   contact: contact.text,
+                            //   password: password.text,
+                            // );
+                            APIservices()
+                                .registerUser(nom.text, prenom.text,
+                                    contact.text, password.text)
+                                .then((check) {
                               // if ret[0] is true reussi
                               if (check![0]) {
                                 Fluttertoast.showToast(
-                                    msg: "Inscription effectué avec succès");
+                                    msg: "Inscription effectué avec succés");
                                 Get.to(Home());
                               } else {
                                 Get.to(const AuthenticationPage());
+                                Fluttertoast.showToast(msg: "$check");
                               }
                             });
                           } else {

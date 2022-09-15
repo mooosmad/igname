@@ -12,8 +12,9 @@ class APIservices {
 
   var token;
 
-  loginUser(String contact, String password) async {
+  Future<List<dynamic>?> loginUser(String contact, String password) async {
     String myUrl = "$serverUrl/login";
+    List<dynamic>? check;
     final response = await http.post(
       Uri.parse(myUrl),
       headers: {'Accept': 'application/json'},
@@ -25,47 +26,86 @@ class APIservices {
 
     if (status) {
       print('data : ${data["error"]}');
+      check = [false, '${data["error"]}'];
     } else {
-      print('data : ${data["token"]}');
-      _save(data["token"]);
+      print('data : ${data["access_token"]}');
+      _save(data["access_token"]);
+      check = [true, "${data["message"]}"];
     }
+    return check;
   }
 
-  Future<List<dynamic>?> registerUser(User usermodel) async {
+  Future<List<dynamic>?> registerUser(
+      String nom, String prenom, String contact, String password) async {
     String myUrl = "$serverUrl/register";
     List<dynamic>? check;
-    final response = await http.post(Uri.parse(myUrl),
-        headers: {'Accept': 'application/json'}, body: usermodel.toJson()
-        // {
-        //   "nom": "$nom",
-        //   "prenom": "$prenom",
-        //   "contact": "$contact",
-        //   "password": "$password"
-        // },
-        );
+    final response = await http.post(
+      Uri.parse(myUrl),
+      headers: {'Accept': 'application/json'},
+      body:
+          // usermodel.toJson()
+          {
+        "nom": "$nom",
+        "prenom": "$prenom",
+        "contact": "$contact",
+        "password": "$password"
+      },
+    );
     status = response.body.contains('error');
 
     var data = json.decode(response.body);
 
-    if (status == 201) {
-      print('data : ${data["token"]}');
-      check = [true, "reussi"];
-      // var box = await Hive.openBox<User>('boxUser');
-      _save(data["token"]);
-      //
-    } else {
+    // if (status == 200) {
+    //   print('data : ${data["token"]}');
+    //   check = [true, "reussi"];
+    //   _save(data["token"]);
+    //   //
+    // } else {
+    //   print('dataerror: ${data["error"]}');
+    //   check = [false, '${data["error"]}'];
+    //   Fluttertoast.showToast(msg: "${data["error"]}");
+    // }
+
+    if (status) {
       print('data : ${data["error"]}');
       check = [false, '${data["error"]}'];
-      Fluttertoast.showToast(msg: "${data["error"]}");
+    } else {
+      print('data : ${data["access_token"]}');
+      _save(data["access_token"]);
+      check = [true, "${data["message"]}"];
     }
-    // return check;
+
+    return check;
   }
 
   _save(String token) async {
     final prefs = await SharedPreferences.getInstance();
-    final key = 'token';
+    final key = 'access_token';
     final value = token;
     prefs.setString(key, value);
+  }
+
+  Future<List<dynamic>?> logout() async {
+    String myUrl = "$serverUrl/logout";
+    List<dynamic>? check;
+    final response = await http.post(
+      Uri.parse(myUrl),
+      headers: {'Accept': 'application/json'},
+    );
+    status = response.body.contains('error');
+
+    var data = json.decode(response.body);
+
+    if (status) {
+      print('data : ${data["error"]}');
+      check = [false, '${data["error"]}'];
+    } else {
+      print('data : ${data["access_token"]}');
+      check = [true, "${data["message"]}"];
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.remove('access_token');
+    }
+    return check;
   }
 
   // Future<List> getData() async{

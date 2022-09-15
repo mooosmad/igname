@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:igname_li/views/authviews/signin.dart';
 import 'package:igname_li/views/authviews/signup.dart';
 
 class AuthenticationPage extends StatelessWidget {
@@ -9,7 +10,7 @@ class AuthenticationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const SizedBox(
+        leading: SizedBox(
           height: 0,
         ),
       ),
@@ -64,7 +65,9 @@ class AuthenticationPage extends StatelessWidget {
                   height: 20,
                 ),
                 OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(const Signin());
+                  },
                   style: OutlinedButton.styleFrom(
                     backgroundColor:
                         Get.isDarkMode ? Colors.transparent : Colors.white,
