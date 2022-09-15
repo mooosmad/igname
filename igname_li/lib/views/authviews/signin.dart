@@ -154,10 +154,11 @@ class _SigninState extends State<Signin> {
                                 });
                                 if (check![0]) {
                                   Fluttertoast.showToast(
-                                      msg: "Connexion reussi");
+                                      msg: "Vous êtes connecté");
                                   Get.to(Home());
                                 } else {
-                                  Fluttertoast.showToast(msg: "$check");
+                                  Fluttertoast.showToast(msg: "${check[1]}");
+                                  Get.to(const Signin());
                                 }
                               });
                             } else {

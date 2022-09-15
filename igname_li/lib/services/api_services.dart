@@ -25,12 +25,17 @@ class APIservices {
     var data = json.decode(response.body);
 
     if (status) {
-      print('data : ${data["error"]}');
-      check = [false, '${data["error"]}'];
+      print('data : ${data["message"]}');
+      check = [false, '${data["message"]}'];
     } else {
-      print('data : ${data["access_token"]}');
-      _save(data["access_token"]);
-      check = [true, "${data["message"]}"];
+      if (data["access_token"] == null) {
+        print("${data["message"]}");
+        check = [false, '${data["message"]}'];
+      } else {
+        print('data : ${data["access_token"]}');
+        _save(data["access_token"]);
+        check = [true, "${data["message"]}"];
+      }
     }
     return check;
   }
@@ -67,8 +72,8 @@ class APIservices {
     // }
 
     if (status) {
-      print('data : ${data["error"]}');
-      check = [false, '${data["error"]}'];
+      print('data : ${data["message"]}');
+      check = [false, '${data["message"]}'];
     } else {
       print('data : ${data["access_token"]}');
       _save(data["access_token"]);
