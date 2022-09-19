@@ -17,7 +17,7 @@ class ThemeIgname {
       elevation: 0,
     ),
     iconTheme: const IconThemeData(
-      color: Color(0xfffdc72f),
+      color: Colors.black,
     ),
     bottomSheetTheme: const BottomSheetThemeData(
       backgroundColor: Colors.transparent,
@@ -104,7 +104,7 @@ class ThemeIgname {
       elevation: 0,
     ),
     iconTheme: const IconThemeData(
-      color: Color(0xfffdc72f),
+      color: Colors.black,
     ),
     bottomSheetTheme: const BottomSheetThemeData(
       backgroundColor: Colors.transparent,

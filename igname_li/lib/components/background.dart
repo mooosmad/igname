@@ -30,7 +30,7 @@ class Background extends StatelessWidget {
             left: 0,
             right: 0,
             child: Image.asset(
-              "assets/images/deliwa2.jpg",
+              "assets/images/3.png",
               // width: size.width,
               fit: BoxFit.fill,
             ),

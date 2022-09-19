@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:igname_li/components/background.dart';
 import 'package:igname_li/components/loading.dart';
 import 'package:igname_li/services/api_services.dart';
-import 'package:igname_li/views/authviews/authentication.dart';
 import 'package:igname_li/views/authviews/signin.dart';
 import 'package:igname_li/views/home.dart';
 
@@ -86,18 +85,11 @@ class _SignupState extends State<Signup> {
                                   borderSide: BorderSide.none),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0xfffdc72f),
+                                  color: Colors.black,
                                 ),
                               ),
                               hintText: 'Nom',
-                              hintStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2!
-                                  .copyWith(
-                                    color: Get.isDarkMode
-                                        ? Colors.white
-                                        : Colors.white,
-                                  ),
+                              hintStyle: Theme.of(context).textTheme.bodyText2!,
                             ),
                             cursorColor:
                                 Get.isDarkMode ? Colors.white : Colors.black,
@@ -128,18 +120,11 @@ class _SignupState extends State<Signup> {
                                   borderSide: BorderSide.none),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0xfffdc72f),
+                                  color: Colors.black,
                                 ),
                               ),
                               hintText: 'Prenom',
-                              hintStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2!
-                                  .copyWith(
-                                    color: Get.isDarkMode
-                                        ? Colors.white
-                                        : Colors.white,
-                                  ),
+                              hintStyle: Theme.of(context).textTheme.bodyText2!,
                             ),
                             cursorColor:
                                 Get.isDarkMode ? Colors.white : Colors.black,
@@ -171,18 +156,11 @@ class _SignupState extends State<Signup> {
                                   borderSide: BorderSide.none),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0xfffdc72f),
+                                  color: Colors.black,
                                 ),
                               ),
                               hintText: 'Numero de telephone',
-                              hintStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2!
-                                  .copyWith(
-                                    color: Get.isDarkMode
-                                        ? Colors.white
-                                        : Colors.white,
-                                  ),
+                              hintStyle: Theme.of(context).textTheme.bodyText2!,
                             ),
                             // cursorColor: Get.isDarkMode ? Colors.white : Colors.black,
                           ),
@@ -215,18 +193,11 @@ class _SignupState extends State<Signup> {
                                   borderSide: BorderSide.none),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0xfffdc72f),
+                                  color: Colors.black,
                                 ),
                               ),
                               hintText: 'Mot de passe',
-                              hintStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2!
-                                  .copyWith(
-                                    color: Get.isDarkMode
-                                        ? Colors.white
-                                        : Colors.white,
-                                  ),
+                              hintStyle: Theme.of(context).textTheme.bodyText2!,
                               suffixIcon: GestureDetector(
                                 onTap: () {
                                   _toggle();
@@ -270,18 +241,11 @@ class _SignupState extends State<Signup> {
                                   borderSide: BorderSide.none),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0xfffdc72f),
+                                  color: Colors.black,
                                 ),
                               ),
                               hintText: 'Confirmez votre mot de passe',
-                              hintStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2!
-                                  .copyWith(
-                                    color: Get.isDarkMode
-                                        ? Colors.white
-                                        : Colors.white,
-                                  ),
+                              hintStyle: Theme.of(context).textTheme.bodyText2!,
                               suffixIcon: GestureDetector(
                                 onTap: () {
                                   _toggler();
