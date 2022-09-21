@@ -1,10 +1,8 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 import 'package:igname_li/components/loading.dart';
-import 'package:igname_li/main.dart';
-import 'package:igname_li/services/api_services.dart';
+import 'package:igname_li/views/widgets/homepage.dart';
+import 'package:igname_li/views/widgets/settingpage.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -19,10 +17,9 @@ class _HomeState extends State<Home> {
   int _counter = 0;
 
   static List<Widget> pages = <Widget>[
+    const Homepage(),
     Container(),
-    Container(),
-    Container(),
-    Container(),
+    const SettingPage(),
   ];
   void _incrementCounter() {
     setState(() {
@@ -39,21 +36,23 @@ class _HomeState extends State<Home> {
             bottomNavigationBar: BottomNavyBar(
               selectedIndex: _currentIndex,
               showElevation: true,
-              itemCornerRadius: 24,
+              itemCornerRadius: 8,
               curve: Curves.easeIn,
               onItemSelected: (index) => setState(() => _currentIndex = index),
               items: <BottomNavyBarItem>[
                 BottomNavyBarItem(
                   icon: const Icon(Icons.apps),
                   title: const Text('Home'),
-                  activeColor: Color(0xfffdc72f),
+                  activeColor: const Color(0xfffdc72f),
                   textAlign: TextAlign.center,
+                  inactiveColor: Colors.grey,
                 ),
                 BottomNavyBarItem(
                   icon: const Icon(Icons.list_alt_outlined),
                   title: const Text('Commandes'),
-                  activeColor: Color(0xfffdc72f),
+                  activeColor: const Color(0xfffdc72f),
                   textAlign: TextAlign.center,
+                  inactiveColor: Colors.grey,
                 ),
                 // BottomNavyBarItem(
                 //   icon: const Icon(Icons.message),
@@ -66,8 +65,9 @@ class _HomeState extends State<Home> {
                 BottomNavyBarItem(
                   icon: const Icon(Icons.settings),
                   title: const Text('Parametres'),
-                  activeColor: Color(0xfffdc72f),
+                  activeColor: const Color(0xfffdc72f),
                   textAlign: TextAlign.center,
+                  inactiveColor: Colors.grey,
                 ),
               ],
             ),
