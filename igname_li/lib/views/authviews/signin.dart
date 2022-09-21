@@ -75,9 +75,11 @@ class _SigninState extends State<Signin> {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
                                   borderSide: BorderSide.none),
-                              focusedBorder: const OutlineInputBorder(
+                              focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Colors.black,
+                                  color: Get.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
                                 ),
                               ),
                               hintText: 'Numero de telephone',
@@ -114,9 +116,11 @@ class _SigninState extends State<Signin> {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
                                   borderSide: BorderSide.none),
-                              focusedBorder: const OutlineInputBorder(
+                              focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Colors.black,
+                                  color: Get.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
                                 ),
                               ),
                               hintText: 'Mot de passe',
