@@ -7,14 +7,23 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(8.0),
           child: Text(
             "Bonjour, Mo",
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.headline1,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Text(
+            "Choisissez le type d'engins pour votre livraison",
+            textAlign: TextAlign.start,
+            style: Theme.of(context).textTheme.bodyText2,
           ),
         ),
         Padding(
@@ -76,7 +85,7 @@ class Homepage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      "Hola",
+                      "Camion",
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                     Image.asset("assets/images/bus.png"),
