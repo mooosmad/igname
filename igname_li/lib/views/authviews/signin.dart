@@ -129,7 +129,9 @@ class _SigninState extends State<Signin> {
                                   _obscureText
                                       ? Icons.remove_red_eye
                                       : Icons.visibility_off_sharp,
-                                  color: Colors.black,
+                                  color: Get.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
                                 ),
                               ),
                             ),

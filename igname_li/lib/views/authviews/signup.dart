@@ -74,6 +74,8 @@ class _SignupState extends State<Signup> {
                             },
                             style: GoogleFonts.poppins(
                               fontSize: 15,
+                              color:
+                                  Get.isDarkMode ? Colors.white : Colors.black,
                             ),
                             decoration: InputDecoration(
                               fillColor: Get.isDarkMode
@@ -109,6 +111,8 @@ class _SignupState extends State<Signup> {
                             },
                             style: GoogleFonts.poppins(
                               fontSize: 15,
+                              color:
+                                  Get.isDarkMode ? Colors.white : Colors.black,
                             ),
                             decoration: InputDecoration(
                               fillColor: Get.isDarkMode
@@ -144,6 +148,8 @@ class _SignupState extends State<Signup> {
                             },
                             style: GoogleFonts.poppins(
                               fontSize: 15,
+                              color:
+                                  Get.isDarkMode ? Colors.white : Colors.black,
                             ),
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
@@ -162,7 +168,8 @@ class _SignupState extends State<Signup> {
                               hintText: 'Numero de telephone',
                               hintStyle: Theme.of(context).textTheme.bodyText2!,
                             ),
-                            // cursorColor: Get.isDarkMode ? Colors.white : Colors.black,
+                            cursorColor:
+                                Get.isDarkMode ? Colors.white : Colors.black,
                           ),
                         ),
                         SizedBox(height: size.height * 0.01),
@@ -181,6 +188,8 @@ class _SignupState extends State<Signup> {
                             }),
                             style: GoogleFonts.poppins(
                               fontSize: 15,
+                              color:
+                                  Get.isDarkMode ? Colors.white : Colors.black,
                             ),
                             obscureText: _obscureText,
                             decoration: InputDecoration(
@@ -206,6 +215,9 @@ class _SignupState extends State<Signup> {
                                   _obscureText
                                       ? Icons.remove_red_eye
                                       : Icons.visibility_off_sharp,
+                                  color: Get.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
                                 ),
                               ),
                             ),
@@ -254,6 +266,9 @@ class _SignupState extends State<Signup> {
                                   _obscureRText
                                       ? Icons.remove_red_eye
                                       : Icons.visibility_off_sharp,
+                                  color: Get.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
                                 ),
                               ),
                             ),
