@@ -27,7 +27,7 @@ class Homepage extends StatelessWidget {
                   borderRadius: const BorderRadius.all(
                     Radius.circular(16),
                   ),
-                  color: Get.isDarkMode ? Colors.black38 : Colors.grey.shade200,
+                  color: const Color(0xfffdc72f).withOpacity(0.8),
                 ),
                 height: 150,
                 child: Row(
@@ -48,7 +48,7 @@ class Homepage extends StatelessWidget {
                   borderRadius: const BorderRadius.all(
                     Radius.circular(8),
                   ),
-                  color: Get.isDarkMode ? Colors.black26 : Colors.grey.shade200,
+                  color: const Color(0xfffdc72f).withOpacity(0.8),
                 ),
                 height: 150,
                 child: Row(
@@ -69,7 +69,7 @@ class Homepage extends StatelessWidget {
                   borderRadius: const BorderRadius.all(
                     Radius.circular(8),
                   ),
-                  color: Get.isDarkMode ? Colors.black26 : Colors.grey.shade200,
+                  color: const Color(0xfffdc72f).withOpacity(0.8),
                 ),
                 height: 150,
                 child: Row(

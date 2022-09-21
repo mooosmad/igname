@@ -1,5 +1,7 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:igname_li/components/loading.dart';
 import 'package:igname_li/views/widgets/homepage.dart';
 import 'package:igname_li/views/widgets/settingpage.dart';
@@ -32,6 +34,15 @@ class _HomeState extends State<Home> {
     return load
         ? const Loading()
         : Scaffold(
+            // appBar: AppBar(
+            //   systemOverlayStyle: SystemUiOverlayStyle(
+            //     statusBarBrightness:
+            //         Get.isDarkMode ? Brightness.light : Brightness.dark,
+            //     statusBarColor: Get.isDarkMode ? Colors.white : Colors.black,
+            //     systemNavigationBarColor:
+            //         Get.isDarkMode ? Colors.white : Colors.black,
+            //   ),
+            // ),
             body: SafeArea(child: pages[_currentIndex]),
             bottomNavigationBar: BottomNavyBar(
               selectedIndex: _currentIndex,

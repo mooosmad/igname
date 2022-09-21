@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:igname_li/components/card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,9 +14,10 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> {
   Widget _arrow() {
-    return const Icon(
+    return Icon(
       Icons.arrow_forward_ios,
       size: 20.0,
+      color: Get.isDarkMode ? Colors.white : Colors.black,
     );
   }
 
@@ -39,155 +41,167 @@ class _SettingPageState extends State<SettingPage> {
           'Parametres',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        systemOverlayStyle: Get.isDarkMode
+            ? SystemUiOverlayStyle.light
+            : SystemUiOverlayStyle.dark,
       ),
       body: Container(
-        color: Get.isDarkMode ? Colors.black26 : Colors.grey.shade200,
+        // color: Get.isDarkMode ? Colors.black12 : Colors.grey.shade200,
         child: ListView(
           children: <Widget>[
-            Padding(
+            Container(
               padding: const EdgeInsets.only(top: 20),
-              child: Container(
-                // color: Get.isDarkMode ? Colors.black26 : Colors.grey.shade200,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      padding: const EdgeInsets.only(left: 16),
-                      child: Text(
-                        'Profiles',
-                        style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF999999),
-                            ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 50,
-                      child: Row(
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.all(12.0),
-                            child: Icon(Icons.person, size: 40),
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Mo Smad",
-                                style: Theme.of(context).textTheme.bodyText2,
-                              ),
-                              Text(
-                                "Voir Profiles",
-                                style: Theme.of(context).textTheme.bodyText2,
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.only(left: 16),
-                      child: const Text(
-                        'Autres',
-                        style: TextStyle(
-                            fontFamily: 'NotoSansJP',
+              color: Get.isDarkMode ? Colors.black45 : Colors.grey.shade200,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Text(
+                      'Profiles',
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
-                            color: Color(0xFF999999)),
-                      ),
+                            color: Color(0xFF999999),
+                          ),
                     ),
-                    const SizedBox(
-                      height: 10,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    height: 50,
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Icon(
+                            Icons.person,
+                            size: 40,
+                            color: Get.isDarkMode ? Colors.white : Colors.black,
+                          ),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Mo Smad",
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ),
+                            Text(
+                              "Voir Profiles",
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ),
+                          ],
+                        )
+                      ],
                     ),
-                    ItemCard(
-                      title: 'Settings Item 02',
-                      color: Get.isDarkMode
-                          ? Colors.black26
-                          : Colors.grey.shade200,
-                      rightWidget: _arrow(),
-                      iconWidget: Container(),
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: const Text(
+                      'Autres',
+                      style: TextStyle(
+                          fontFamily: 'NotoSansJP',
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF999999)),
                     ),
-                    ItemCard(
-                      title: 'Settings Item 03',
-                      color: Get.isDarkMode
-                          ? Colors.black26
-                          : Colors.grey.shade200,
-                      rightWidget: _arrow(),
-                      iconWidget: Container(),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  // ItemCard(
+                  //   title: 'Settings Item 02',
+                  //   color: Get.isDarkMode
+                  //       ? Colors.black26
+                  //       : Colors.grey.shade200,
+                  //   rightWidget: _arrow(),
+                  //   iconWidget: Container(),
+                  // ),
+                  ItemCard(
+                    title: 'À propos de nous',
+                    color:
+                        Get.isDarkMode ? Colors.black26 : Colors.grey.shade200,
+                    rightWidget: _arrow(),
+                    iconWidget: Container(),
+                  ),
+                  ItemCard(
+                    title: 'Contactez nous',
+                    color:
+                        Get.isDarkMode ? Colors.black26 : Colors.grey.shade200,
+                    rightWidget: _arrow(),
+                    iconWidget: Icon(
+                      Icons.call,
+                      color: Get.isDarkMode ? Colors.white : Colors.black,
                     ),
-                    ItemCard(
-                      title: 'Contactez nous',
-                      color: Get.isDarkMode
-                          ? Colors.black26
-                          : Colors.grey.shade200,
-                      rightWidget: _arrow(),
-                      iconWidget: const Icon(Icons.call),
+                  ),
+                  ItemCard(
+                    title: 'Aides',
+                    color:
+                        Get.isDarkMode ? Colors.black26 : Colors.grey.shade200,
+                    rightWidget: Container(),
+                    iconWidget: Icon(
+                      Icons.help,
+                      color: Get.isDarkMode ? Colors.white : Colors.black,
                     ),
-                    ItemCard(
-                      title: 'Aides',
-                      color: Get.isDarkMode
-                          ? Colors.black26
-                          : Colors.grey.shade200,
-                      rightWidget: Container(),
-                      iconWidget: const Icon(Icons.help),
+                  ),
+                  ItemCard(
+                    title: 'Mode Sombre',
+                    color:
+                        Get.isDarkMode ? Colors.black26 : Colors.grey.shade200,
+                    rightWidget: CupertinoSwitch(
+                      activeColor: const Color(0xfffdc72f),
+                      value: isdarkmode,
+                      onChanged: (v) async {
+                        setState(() {
+                          isdarkmode = v;
+                        });
+                        Get.changeThemeMode(
+                          Get.isDarkMode ? ThemeMode.light : ThemeMode.dark,
+                        );
+                        changeTheme(Get.isDarkMode);
+                      },
                     ),
-                    ItemCard(
-                      title: 'Mode Sombre',
-                      color: Get.isDarkMode
-                          ? Colors.black26
-                          : Colors.grey.shade200,
-                      rightWidget: CupertinoSwitch(
-                        activeColor: const Color(0xfffdc72f),
-                        value: isdarkmode,
-                        onChanged: (v) {
-                          setState(() {
-                            isdarkmode = v;
-                            Get.changeThemeMode(
-                              Get.isDarkMode ? ThemeMode.light : ThemeMode.dark,
-                            );
-                          });
-                        },
-                      ),
-                      iconWidget: const Icon(Icons.dark_mode),
+                    iconWidget: Icon(
+                      Icons.dark_mode,
+                      color: Get.isDarkMode ? Colors.white : Colors.black,
                     ),
-                    ItemCard(
-                      title: 'Deconnexion',
-                      color: Get.isDarkMode
-                          ? Colors.black26
-                          : Colors.grey.shade200,
-                      rightWidget: Container(),
-                      iconWidget: const Icon(Icons.logout),
+                  ),
+                  ItemCard(
+                    title: 'Deconnexion',
+                    color:
+                        Get.isDarkMode ? Colors.black26 : Colors.grey.shade200,
+                    rightWidget: Container(),
+                    iconWidget: Icon(
+                      Icons.logout,
+                      color: Get.isDarkMode ? Colors.white : Colors.black,
                     ),
-                    const SizedBox(
-                      height: 40,
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  ItemCard(
+                    title: 'version',
+                    color:
+                        Get.isDarkMode ? Colors.black26 : Colors.grey.shade200,
+                    rightWidget: const Center(
+                      child: Text('1.0.0',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
+                          )),
                     ),
-                    ItemCard(
-                      title: 'version',
-                      color: Get.isDarkMode
-                          ? Colors.black26
-                          : Colors.grey.shade200,
-                      rightWidget: const Center(
-                        child: Text('1.0.0',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.normal,
-                            )),
-                      ),
-                      iconWidget: Container(),
-                    ),
-                    const SizedBox(
-                      height: 200,
-                    ),
-                  ],
-                ),
+                    iconWidget: Container(),
+                  ),
+                  const SizedBox(
+                    height: 200,
+                  ),
+                ],
               ),
             ),
           ],

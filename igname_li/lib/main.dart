@@ -1,7 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:igname_li/components/loading.dart';
 import 'package:igname_li/themes/theme.dart';
 import 'package:igname_li/views/authviews/authentication.dart';
 import 'package:igname_li/views/home.dart';
