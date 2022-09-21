@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ThemeIgname {
   static final ligthTheme = ThemeData.light().copyWith(
@@ -16,8 +17,8 @@ class ThemeIgname {
       foregroundColor: Colors.black,
       elevation: 0,
     ),
-    iconTheme: const IconThemeData(
-      color: Colors.black,
+    iconTheme: IconThemeData(
+      color: Get.isDarkMode ? Colors.white : Colors.black,
     ),
     bottomSheetTheme: const BottomSheetThemeData(
       backgroundColor: Colors.transparent,
@@ -103,8 +104,8 @@ class ThemeIgname {
       foregroundColor: Colors.white,
       elevation: 0,
     ),
-    iconTheme: const IconThemeData(
-      color: Colors.black,
+    iconTheme: IconThemeData(
+      color: Get.isDarkMode ? Colors.white : Colors.black,
     ),
     bottomSheetTheme: const BottomSheetThemeData(
       backgroundColor: Colors.transparent,

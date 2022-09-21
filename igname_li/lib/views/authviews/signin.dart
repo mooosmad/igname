@@ -56,6 +56,8 @@ class _SigninState extends State<Signin> {
                           child: TextFormField(
                             style: GoogleFonts.poppins(
                               fontSize: 15,
+                              color:
+                                  Get.isDarkMode ? Colors.white : Colors.black,
                             ),
                             controller: contact,
                             validator: (value) {
@@ -99,6 +101,8 @@ class _SigninState extends State<Signin> {
                             },
                             style: GoogleFonts.poppins(
                               fontSize: 15,
+                              color:
+                                  Get.isDarkMode ? Colors.white : Colors.black,
                             ),
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: _obscureText,
