@@ -16,6 +16,8 @@ class ChooseThemePage extends StatefulWidget {
 class _ChooseThemePageState extends State<ChooseThemePage> {
   bool isdarkmode = Get.isDarkMode;
 
+  bool select = false;
+
   changeTheme(bool v) async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -90,9 +92,7 @@ class _ChooseThemePageState extends State<ChooseThemePage> {
                           backgroundColor: const Color(0xffe5e5e5),
                         ),
                         onPressed: () {
-                          Get.changeThemeMode(
-                            Get.isDarkMode ? ThemeMode.light : ThemeMode.dark,
-                          );
+                          Get.changeThemeMode(ThemeMode.light);
                         },
                         child: Container(
                           margin: const EdgeInsets.only(
@@ -127,9 +127,7 @@ class _ChooseThemePageState extends State<ChooseThemePage> {
                           backgroundColor: const Color(0xff626262),
                         ),
                         onPressed: () {
-                          Get.changeThemeMode(
-                            Get.isDarkMode ? ThemeMode.light : ThemeMode.dark,
-                          );
+                          Get.changeThemeMode(ThemeMode.dark);
                         },
                         child: Container(
                           margin: const EdgeInsets.only(

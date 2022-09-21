@@ -14,7 +14,7 @@ late bool isFirst;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
-  String? theme = prefs.getString('theme') ?? 'dark';
+  String? theme = prefs.getString('theme') ?? 'light';
   isFirst = prefs.getBool('isFirst') ?? true;
 
   runApp(MyApp(
