@@ -62,7 +62,7 @@ class _SettingPageState extends State<SettingPage> {
                       style: Theme.of(context).textTheme.bodyText2!.copyWith(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
-                            color: Color(0xFF999999),
+                            color: const Color(0xfffdc72f).withOpacity(0.8),
                           ),
                     ),
                   ),
@@ -103,13 +103,13 @@ class _SettingPageState extends State<SettingPage> {
                   ),
                   Container(
                     padding: const EdgeInsets.only(left: 16),
-                    child: const Text(
+                    child: Text(
                       'Autres',
                       style: TextStyle(
                           fontFamily: 'NotoSansJP',
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
-                          color: Color(0xFF999999)),
+                          color: Color(0xfffdc72f).withOpacity(0.8)),
                     ),
                   ),
                   const SizedBox(
