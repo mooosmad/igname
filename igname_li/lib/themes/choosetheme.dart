@@ -63,7 +63,7 @@ class _ChooseThemePageState extends State<ChooseThemePage> {
             ),
             const SizedBox(height: 10),
             Text(
-              "Choisissez le theme qui vous combien le mieux",
+              "Choisissez le theme qui vous convient le mieux",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyText2!.copyWith(
                     color: Colors.grey,
