@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Car extends StatefulWidget {
-  Car({Key? key}) : super(key: key);
+  const Car({Key? key}) : super(key: key);
 
   @override
   State<Car> createState() => _CarState();
