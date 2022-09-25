@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -309,7 +311,7 @@ class _SignupState extends State<Signup> {
                                 if (check![0]) {
                                   Fluttertoast.showToast(
                                       msg: "Inscription effectué avec succés");
-                                  Get.to(Home());
+                                  Get.to(const Home());
                                 } else {
                                   Fluttertoast.showToast(msg: "${check[1]}");
                                   Get.to(const Signup());

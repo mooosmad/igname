@@ -10,7 +10,7 @@ class AuthenticationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: SizedBox(
+        leading: const SizedBox(
           height: 0,
         ),
       ),

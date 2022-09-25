@@ -7,7 +7,7 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: double.infinity,
         child: Center(
           child: Lottie.asset(

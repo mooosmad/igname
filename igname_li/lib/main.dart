@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -62,7 +64,7 @@ class MySplashScreen extends StatelessWidget {
       splash: 'assets/images/logo.png',
       splashIconSize: 250,
       backgroundColor: Get.isDarkMode ? Colors.black : Colors.white,
-      nextScreen: CheckAuth(),
+      nextScreen: const CheckAuth(),
       //  isFirst ? const OnBoarding() : const AuthenticationPage(),
       splashTransition: SplashTransition.slideTransition,
     );
@@ -70,6 +72,8 @@ class MySplashScreen extends StatelessWidget {
 }
 
 class CheckAuth extends StatefulWidget {
+  const CheckAuth({super.key});
+
   @override
   _CheckAuthState createState() => _CheckAuthState();
 }
@@ -97,7 +101,7 @@ class _CheckAuthState extends State<CheckAuth> {
   Widget build(BuildContext context) {
     Widget child;
     if (isAuth) {
-      child = Home();
+      child = const Home();
     } else {
       if (isFirst) {
         child = const OnBoarding();

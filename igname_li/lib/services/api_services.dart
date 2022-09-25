@@ -1,8 +1,6 @@
-// ignore_for_file: depend_on_referenced_packages
+// ignore_for_file: depend_on_referenced_packages, prefer_typing_uninitialized_variables, unnecessary_string_interpolations, avoid_print, prefer_const_declarations
 
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:igname_li/model/user.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 

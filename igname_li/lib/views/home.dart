@@ -1,13 +1,13 @@
+// ignore_for_file: unused_field, unused_element
+
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:igname_li/components/loading.dart';
 import 'package:igname_li/views/widgets/homepage.dart';
 import 'package:igname_li/views/widgets/settingpage.dart';
 
 class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
+  const Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();

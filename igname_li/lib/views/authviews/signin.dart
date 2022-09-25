@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -165,7 +167,7 @@ class _SigninState extends State<Signin> {
                                 if (check![0]) {
                                   Fluttertoast.showToast(
                                       msg: "Vous êtes connecté");
-                                  Get.to(Home());
+                                  Get.to(const Home());
                                 } else {
                                   Fluttertoast.showToast(msg: "${check[1]}");
                                   Get.to(const Signin());
