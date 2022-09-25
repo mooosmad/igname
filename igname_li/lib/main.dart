@@ -1,5 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:igname_li/themes/theme.dart';
 import 'package:igname_li/views/authviews/authentication.dart';
@@ -15,7 +16,10 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   String? theme = prefs.getString('theme') ?? 'light';
   isFirst = prefs.getBool('isFirst') ?? true;
-
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarBrightness: Get.isDarkMode ? Brightness.light : Brightness.dark,
+    systemNavigationBarColor: Get.isDarkMode ? Colors.white : Colors.black,
+  ));
   runApp(MyApp(
     theme: theme,
   ));
