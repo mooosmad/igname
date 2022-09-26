@@ -36,7 +36,7 @@ class UserAdapter extends TypeAdapter<User> {
       ..write(obj.prenom)
       ..writeByte(3)
       ..write(obj.contact)
-      ..writeByte(5)
+      ..writeByte(4)
       ..write(obj.password);
   }
 

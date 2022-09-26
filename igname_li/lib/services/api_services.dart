@@ -4,7 +4,6 @@ import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:igname_li/models/user.dart';
 import 'package:igname_li/models/usermodel.dart';
-
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -77,8 +76,9 @@ class APIservices {
     } else {
       print('data : ${data["access_token"]}');
       _save(data["access_token"]);
-      var box = await Hive.openBox<User>('boxUser');
-      box.put("user", User());
+      var user = User();
+      final box = await Hive.openBox<User>('boxUser');
+      box.put("user", user);
       check = [true, "${data["message"]}"];
     }
 

@@ -4,13 +4,17 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:igname_li/models/user.dart';
 import 'package:igname_li/themes/theme.dart';
 import 'package:igname_li/views/authviews/authentication.dart';
 import 'package:igname_li/views/home.dart';
 import 'package:igname_li/views/onboarding/onboarding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path_provider/path_provider.dart' as path;
 
 late bool isFirst;
+late Box box;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +25,11 @@ void main() async {
     statusBarBrightness: Get.isDarkMode ? Brightness.light : Brightness.dark,
     systemNavigationBarColor: Get.isDarkMode ? Colors.white : Colors.black,
   ));
+  final dir = await path.getApplicationDocumentsDirectory();
+  //Hive.init(appDocumentDirectory.path);
+  Hive.init(dir.path);
+  Hive.registerAdapter(UserAdapter());
+  await Hive.openBox<User>('boxUser');
   runApp(MyApp(
     theme: theme,
   ));

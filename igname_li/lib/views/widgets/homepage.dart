@@ -1,11 +1,29 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:igname_li/views/widgets/camion.dart';
 import 'package:igname_li/views/widgets/car.dart';
 import 'package:igname_li/views/widgets/moto.dart';
 
-class Homepage extends StatelessWidget {
+class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
+
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  // user box
+  late Box userBox;
+
+  @override
+  void initState() {
+    super.initState();
+    // get the previously opened user box
+    userBox = userBox.get('boxUser');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +34,7 @@ class Homepage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "Bonjour, Mo",
+            "Hi, $userBox.name",
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.headline1,
           ),

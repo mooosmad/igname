@@ -12,11 +12,11 @@ class User {
   final int? id;
   @HiveField(1)
   final String? nom;
-  @HiveField(3)
+  @HiveField(2)
   final String? prenom;
-  @HiveField(4)
+  @HiveField(3)
   final String? contact;
-  @HiveField(5)
+  @HiveField(4)
   final String? password;
 
   User({
