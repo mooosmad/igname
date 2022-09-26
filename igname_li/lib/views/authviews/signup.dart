@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:igname_li/components/background.dart';
 import 'package:igname_li/components/loading.dart';
+import 'package:igname_li/model/usermodel.dart';
 import 'package:igname_li/services/api_services.dart';
 import 'package:igname_li/views/authviews/signin.dart';
 import 'package:igname_li/views/home.dart';
@@ -301,6 +302,13 @@ class _SignupState extends State<Signup> {
                               //   contact: contact.text,
                               //   password: password.text,
                               // );
+                              UserModel usermodel = UserModel(
+                                nom.text,
+                                prenom.text,
+                                contact.text,
+                                password.text,
+                              );
+
                               APIservices()
                                   .registerUser(nom.text, prenom.text,
                                       contact.text, password.text)

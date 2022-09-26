@@ -8,7 +8,6 @@ import 'package:igname_li/themes/theme.dart';
 import 'package:igname_li/views/authviews/authentication.dart';
 import 'package:igname_li/views/home.dart';
 import 'package:igname_li/views/onboarding/onboarding.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 late bool isFirst;
