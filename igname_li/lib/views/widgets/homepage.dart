@@ -27,7 +27,7 @@ class _HomepageState extends State<Homepage> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "Hi, ${user.nom}",
+            "Bienvenue ${user.nom}",
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.headline1,
           ),

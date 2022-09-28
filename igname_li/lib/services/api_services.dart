@@ -1,10 +1,8 @@
 // ignore_for_file: depend_on_referenced_packages, prefer_typing_uninitialized_variables, unnecessary_string_interpolations, avoid_print, prefer_const_declarations
 
-import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:igname_li/main.dart';
 import 'package:igname_li/models/user.dart';
-import 'package:igname_li/models/usermodel.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 

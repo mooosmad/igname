@@ -6,8 +6,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:igname_li/components/background.dart';
 import 'package:igname_li/components/loading.dart';
-import 'package:igname_li/models/user.dart';
-import 'package:igname_li/models/usermodel.dart';
 import 'package:igname_li/services/api_services.dart';
 import 'package:igname_li/views/authviews/signin.dart';
 import 'package:igname_li/views/home.dart';

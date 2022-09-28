@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:igname_li/components/map.dart';
 
 class Moto extends StatefulWidget {
   const Moto({Key? key}) : super(key: key);
@@ -8,8 +11,141 @@ class Moto extends StatefulWidget {
 }
 
 class _MotoState extends State<Moto> {
+  RxString adresseDeLivraison = "".obs;
+
+  RxString adresseDeLivraison2 = "".obs;
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Livraison à moto"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(8),
+                ),
+                color: const Color(0xfffdc72f).withOpacity(0.7),
+                // boxShadow: [
+                //   BoxShadow(
+                //     color: Colors.grey.withOpacity(0.3),
+                //     spreadRadius: 2,
+                //     blurRadius: 2,
+                //     offset: const Offset(0, 3), // changes position of shadow
+                //   ),
+                // ],
+              ),
+              height: 60,
+              width: Get.height * 0.8,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Icon(Icons.delivery_dining),
+                  Text(
+                    "Si votre commande entre dans notre sac à dos,\nOn peut vous livrer. Si non choisissez voiture...",
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    softWrap: true,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              "À partir d'où ?",
+              style: Theme.of(context).textTheme.headline1,
+            ),
+            const SizedBox(height: 25),
+            myMap(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Lieu de Recuperation",
+                textAlign: TextAlign.start,
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              "Où ?",
+              style: Theme.of(context).textTheme.headline1,
+            ),
+            const SizedBox(height: 25),
+            myMap(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Lieu de Livraison",
+                textAlign: TextAlign.start,
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget myMap() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: SizedBox(
+        height: 100,
+        width: double.infinity,
+        child: InkWell(
+          onTap: () async {
+            final res = await Get.to(
+              const MyMap(),
+              transition: Transition.size,
+            );
+            adresseDeLivraison.value = res ?? "";
+            if (res != null) {
+              Fluttertoast.showToast(msg: "choix effectué");
+            }
+          },
+          child: IgnorePointer(
+            child: Image.asset(
+              "assets/images/illustration.jpg",
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget myMap2() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: SizedBox(
+        height: 100,
+        width: double.infinity,
+        child: InkWell(
+          onTap: () async {
+            final res = await Get.to(
+              const MyMap(),
+              transition: Transition.size,
+            );
+            adresseDeLivraison2.value = res ?? "";
+            if (res != null) {
+              Fluttertoast.showToast(msg: "choix effectué");
+            }
+          },
+          child: IgnorePointer(
+            child: Image.asset(
+              "assets/images/illustration.jpg",
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

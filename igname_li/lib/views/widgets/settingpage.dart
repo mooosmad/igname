@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:igname_li/components/card.dart';
 import 'package:igname_li/components/loading.dart';
 import 'package:igname_li/main.dart';
+import 'package:igname_li/models/user.dart';
 import 'package:igname_li/services/api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,6 +40,7 @@ class _SettingPageState extends State<SettingPage> {
 
   @override
   Widget build(BuildContext context) {
+    User user = box.get("users");
     return load
         ? const Loading()
         : Scaffold(
@@ -90,7 +92,7 @@ class _SettingPageState extends State<SettingPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Mo Smad",
+                                  "${user.prenom} ${user.nom}",
                                   style: Theme.of(context).textTheme.bodyText2,
                                 ),
                                 Text(
