@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:igname_li/main.dart';
+import 'package:igname_li/models/user.dart';
 import 'package:igname_li/views/widgets/camion.dart';
 import 'package:igname_li/views/widgets/car.dart';
 import 'package:igname_li/views/widgets/moto.dart';
@@ -16,17 +18,10 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   // user box
-  late Box userBox;
-
-  @override
-  void initState() {
-    super.initState();
-    // get the previously opened user box
-    userBox = userBox.get('boxUser');
-  }
 
   @override
   Widget build(BuildContext context) {
+    User user = box.get("user");
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +29,7 @@ class _HomepageState extends State<Homepage> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "Hi, $userBox.name",
+            "Hi, ${user.nom}",
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.headline1,
           ),

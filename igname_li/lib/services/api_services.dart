@@ -2,6 +2,7 @@
 
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
+import 'package:igname_li/main.dart';
 import 'package:igname_li/models/user.dart';
 import 'package:igname_li/models/usermodel.dart';
 import 'dart:convert';
@@ -41,19 +42,19 @@ class APIservices {
     return check;
   }
 
-  Future<List<dynamic>?> registerUser(UserModel usermodel) async {
+  Future<List<dynamic>?> registerUser(
+      String nom, String prenom, String contact, String password) async {
     String myUrl = "$serverUrl/register";
     List<dynamic>? check;
     final response = await http.post(
       Uri.parse(myUrl),
-      headers: {'Accept': 'application/json'}, body: usermodel.toJson(),
-      //     {
-      //   // "nom": "$nom",
-      //   // "prenom": "$prenom",
-      //   // "contact": "$contact",
-      //   // "password": "$password"
-
-      // },
+      headers: {'Accept': 'application/json'},
+      body: {
+        "nom": "$nom",
+        "prenom": "$prenom",
+        "contact": "$contact",
+        "password": "$password"
+      },
     );
     status = response.body.contains('error');
 
@@ -76,9 +77,10 @@ class APIservices {
     } else {
       print('data : ${data["access_token"]}');
       _save(data["access_token"]);
-      var user = User();
-      final box = await Hive.openBox<User>('boxUser');
-      box.put("user", user);
+      box.put(
+        "user",
+        User(nom: nom, prenom: prenom, contact: contact, password: password),
+      );
       check = [true, "${data["message"]}"];
     }
 
