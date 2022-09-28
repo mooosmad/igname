@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import 'package:igname_li/main.dart';
 import 'package:igname_li/models/user.dart';
 import 'package:igname_li/views/widgets/camion.dart';
@@ -18,10 +17,9 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   // user box
-
   @override
   Widget build(BuildContext context) {
-    User user = box.get("user");
+    User user = box.get("users");
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,

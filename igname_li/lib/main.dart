@@ -2,16 +2,15 @@
 
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import 'package:igname_li/models/user.dart';
 import 'package:igname_li/themes/theme.dart';
 import 'package:igname_li/views/authviews/authentication.dart';
 import 'package:igname_li/views/home.dart';
 import 'package:igname_li/views/onboarding/onboarding.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:path_provider/path_provider.dart' as path;
 
 late bool isFirst;
 late Box box;
@@ -21,12 +20,11 @@ Future<void> main() async {
   final prefs = await SharedPreferences.getInstance();
   String? theme = prefs.getString('theme') ?? 'light';
   isFirst = prefs.getBool('isFirst') ?? true;
-// hive
-  final dir = await path.getApplicationDocumentsDirectory();
-  //Hive.init(appDocumentDirectory.path);
-  Hive.init(dir.path);
+  // hive initialisation
+  final document = await getApplicationDocumentsDirectory();
+  await Hive.initFlutter(document.path);
   Hive.registerAdapter(UserAdapter());
-  box = await Hive.openBox<User>('boxUser');
+  box = await Hive.openBox<User>('userBox');
 
   runApp(MyApp(
     theme: theme,

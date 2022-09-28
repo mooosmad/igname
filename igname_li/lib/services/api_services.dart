@@ -77,10 +77,11 @@ class APIservices {
     } else {
       print('data : ${data["access_token"]}');
       _save(data["access_token"]);
-      box.put(
-        "user",
+      await box.put(
+        'users',
         User(nom: nom, prenom: prenom, contact: contact, password: password),
       );
+      print(box.get('users'));
       check = [true, "${data["message"]}"];
     }
 
