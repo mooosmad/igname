@@ -12,6 +12,22 @@ class APIservices {
 
   var token;
 
+  Future getDataUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'access_token';
+    final value = prefs.get(key) ?? 0;
+
+    String myUrl = "$serverUrl/me";
+    http.Response response = await http.post(Uri.parse(myUrl), headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $value'
+    });
+    print(response.body);
+    final Map<String, dynamic> data = json.decode(response.body);
+    // return json.decode(response.body);
+    return data;
+  }
+
   Future<List<dynamic>?> loginUser(String contact, String password) async {
     String myUrl = "$serverUrl/login";
     List<dynamic>? check;
@@ -75,11 +91,11 @@ class APIservices {
     } else {
       print('data : ${data["access_token"]}');
       _save(data["access_token"]);
-      await box.put(
-        'users',
-        User(nom: nom, prenom: prenom, contact: contact, password: password),
-      );
-      print(box.get('users'));
+      // await box.put(
+      //   'users',
+      //   User(nom: nom, prenom: prenom, contact: contact, password: password),
+      // );
+      // print(box.get('users'));
       check = [true, "${data["message"]}"];
     }
 

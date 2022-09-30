@@ -1,35 +1,58 @@
-import 'package:hive/hive.dart';
-part "user.g.dart";
+import 'dart:convert';
 
-@HiveType(typeId: 0)
+User userFromMap(String str) => User.fromMap(json.decode(str));
+
+String userToMap(User data) => json.encode(data.toMap());
+
+@JsonSerializable(explicitToJson: true, anyMap: true)
 class User {
-  @HiveField(0)
-  final String? nom;
-  @HiveField(1)
-  final String? prenom;
-  @HiveField(2)
-  final String? contact;
-  @HiveField(3)
-  final String? password;
-
   User({
-    this.nom,
-    this.prenom,
-    this.contact,
-    this.password,
+    required this.id,
+    required this.nom,
+    required this.prenom,
+    required this.contact,
+    required this.email,
+    required this.emailVerifiedAt,
+    required this.role,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  int id;
+  String nom;
+  String prenom;
+  String contact;
+  dynamic email;
+  dynamic emailVerifiedAt;
+  String role;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  factory User.fromMap(Map<String, dynamic> json) => User(
+        id: json["id"],
         nom: json["nom"],
         prenom: json["prenom"],
         contact: json["contact"],
-        password: json["password"],
+        email: json["email"],
+        emailVerifiedAt: json["email_verified_at"],
+        role: json["role"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
+        "id": id,
         "nom": nom,
         "prenom": prenom,
         "contact": contact,
-        "password": password,
+        "email": email,
+        "email_verified_at": emailVerifiedAt,
+        "role": role,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
       };
+}
+
+class JsonSerializable {
+  const JsonSerializable({required bool explicitToJson, required bool anyMap});
 }

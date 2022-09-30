@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:igname_li/main.dart';
 import 'package:igname_li/models/user.dart';
+import 'package:igname_li/services/api_services.dart';
 import 'package:igname_li/views/widgets/camion.dart';
 import 'package:igname_li/views/widgets/car.dart';
 import 'package:igname_li/views/widgets/moto.dart';
@@ -16,10 +16,23 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  // user box
+  // user get
+  List? user;
+
+  getData() async {
+    user = await APIservices().getDataUser();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    User user = box.get("users");
+    print(user);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,7 +40,7 @@ class _HomepageState extends State<Homepage> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "Bienvenue ${user.nom}",
+            "Bienvenue $user",
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.headline1,
           ),
