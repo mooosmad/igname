@@ -2,9 +2,11 @@
 
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:igname_li/components/loading.dart';
 import 'package:igname_li/views/widgets/homepage.dart';
 import 'package:igname_li/views/widgets/settingpage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -29,6 +31,16 @@ class _HomeState extends State<Home> {
     });
   }
 
+  changeTheme(bool v) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    if (v) {
+      prefs.setString('theme', "dark");
+    } else {
+      prefs.setString('theme', "light");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return load
@@ -49,7 +61,10 @@ class _HomeState extends State<Home> {
               showElevation: true,
               itemCornerRadius: 8,
               curve: Curves.easeIn,
-              onItemSelected: (index) => setState(() => _currentIndex = index),
+              onItemSelected: (index) => setState(() {
+                _currentIndex = index;
+                changeTheme(Get.isDarkMode);
+              }),
               items: <BottomNavyBarItem>[
                 BottomNavyBarItem(
                   icon: const Icon(Icons.apps),

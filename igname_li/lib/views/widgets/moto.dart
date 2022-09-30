@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:igname_li/components/map.dart';
-import 'package:igname_li/components/map2.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:google_static_maps_controller/google_static_maps_controller.dart';
+import 'package:igname_li/components/loading.dart';
+import 'package:igname_li/components/map_recuperation.dart';
+import 'package:igname_li/components/map_livraison.dart';
+import 'package:igname_li/utils/utils.dart';
 
 class Moto extends StatefulWidget {
   const Moto({Key? key}) : super(key: key);
@@ -15,6 +19,7 @@ class _MotoState extends State<Moto> {
   RxString adresseDeLivraison = "".obs;
 
   RxString adresseDeLivraison2 = "".obs;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +28,8 @@ class _MotoState extends State<Moto> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -58,7 +63,12 @@ class _MotoState extends State<Moto> {
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 25),
+            Text(
+              "Votre commande",
+              style: Theme.of(context).textTheme.headline2,
+            ),
+            const SizedBox(height: 25),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -67,7 +77,10 @@ class _MotoState extends State<Moto> {
                   const SizedBox(width: 10),
                   Text(
                     "À partir d'où ?",
-                    style: Theme.of(context).textTheme.headline2,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline2!
+                        .copyWith(fontWeight: FontWeight.w400),
                   ),
                 ],
               ),
@@ -77,7 +90,7 @@ class _MotoState extends State<Moto> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "Lieu de Recuperation",
+                "Lieu de recuperation $adresseDeLivraison",
                 textAlign: TextAlign.start,
                 style: Theme.of(context)
                     .textTheme
@@ -94,17 +107,20 @@ class _MotoState extends State<Moto> {
                   const SizedBox(width: 10),
                   Text(
                     "Où ?",
-                    style: Theme.of(context).textTheme.headline2,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline2!
+                        .copyWith(fontWeight: FontWeight.w400),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 10),
-            myMap(),
+            myMap2(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "Lieu de Livraison",
+                "Lieu de livraison $adresseDeLivraison2",
                 textAlign: TextAlign.start,
                 style: Theme.of(context)
                     .textTheme
@@ -112,6 +128,66 @@ class _MotoState extends State<Moto> {
                     .copyWith(fontWeight: FontWeight.normal),
               ),
             ),
+            const SizedBox(height: 10),
+            Container(
+              alignment: Alignment.center,
+              margin: const EdgeInsets.symmetric(horizontal: 8),
+              child: TextFormField(
+                style: GoogleFonts.poppins(
+                  fontSize: 15,
+                  color: Get.isDarkMode ? Colors.white : Colors.black,
+                ),
+                // controller: contact,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Champ vide";
+                  }
+                  return null;
+                },
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  // fillColor: Get.isDarkMode
+                  //     ? Colors.grey.shade100
+                  //     : Colors.grey.shade200,
+                  filled: false,
+                  // border: OutlineInputBorder(
+                  //     borderRadius: BorderRadius.circular(8),
+                  //     borderSide: BorderSide.none),
+                  // focusedBorder: OutlineInputBorder(
+                  //   borderSide: BorderSide(
+                  //     color: Get.isDarkMode ? Colors.white : Colors.black,
+                  //   ),
+                  // ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color:
+                          Get.isDarkMode ? Colors.white : Colors.grey.shade300,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color:
+                          Get.isDarkMode ? Colors.white : Colors.grey.shade500,
+                    ),
+                  ),
+                  // border: UnderlineInputBorder(
+                  //   borderSide: BorderSide(
+                  //     color: Get.isDarkMode ? Colors.white : Colors.black,
+                  //   ),
+                  // ),
+                  hintText: 'Ajoutez le numero de telephone du recepteur ',
+                  hintStyle: Theme.of(context)
+                      .textTheme
+                      .bodyText2!
+                      .copyWith(color: Colors.grey.shade400),
+                  prefixIcon: const Icon(Icons.phone_android_rounded),
+                ),
+                cursorColor: Get.isDarkMode ? Colors.white : Colors.black,
+              ),
+            ),
+            const SizedBox(height: 25),
+            myrecap(),
+            const SizedBox(height: 25),
           ],
         ),
       ),
@@ -120,7 +196,7 @@ class _MotoState extends State<Moto> {
 
   Widget myMap() {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(8),
       child: SizedBox(
         height: 100,
         width: double.infinity,
@@ -147,8 +223,21 @@ class _MotoState extends State<Moto> {
   }
 
   Widget myMap2() {
+    const _controller = StaticMapController(
+      googleApiKey: keymap,
+      width: 400,
+      height: 100,
+      zoom: 10,
+      center: Location(-3.1178833, -60.0029284),
+    );
+
+    /// Get map image provider from controller.
+    /// You can also get image url by accessing
+    /// `_controller.url` property.
+    ImageProvider<Object> image = _controller.image;
+
     return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(8),
       child: SizedBox(
         height: 100,
         width: double.infinity,
@@ -164,11 +253,53 @@ class _MotoState extends State<Moto> {
             }
           },
           child: IgnorePointer(
-            child: Image.asset(
-              "assets/images/illustration.jpg",
-              fit: BoxFit.cover,
-            ),
+            child: adresseDeLivraison2 == null
+                ? const Loading()
+                : Image.asset(
+                    "assets/images/illustration.jpg",
+                    fit: BoxFit.cover,
+                  ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget myrecap() {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(8),
+        ),
+        color: Colors.grey[200],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              "Recapitulatif.",
+              style: Theme.of(context).textTheme.headline2,
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Prix de la livraison estimé",
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                Text(
+                  "1000 FCFA",
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );

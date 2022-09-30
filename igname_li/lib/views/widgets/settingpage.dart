@@ -28,16 +28,6 @@ class _SettingPageState extends State<SettingPage> {
   bool load = false;
   bool isdarkmode = Get.isDarkMode;
 
-  changeTheme(bool v) async {
-    final prefs = await SharedPreferences.getInstance();
-
-    if (v) {
-      prefs.setString('theme', "dark");
-    } else {
-      prefs.setString('theme', "light");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     User user = box.get("users");
@@ -174,7 +164,6 @@ class _SettingPageState extends State<SettingPage> {
                             Get.changeThemeMode(
                               Get.isDarkMode ? ThemeMode.light : ThemeMode.dark,
                             );
-                            changeTheme(Get.isDarkMode);
                           },
                         ),
                         iconWidget: Icon(

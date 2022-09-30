@@ -1,4 +1,6 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
+
+import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
@@ -74,7 +76,7 @@ class _MyMapState extends State<MyMap> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         centerTitle: true,
         title: Text(
-          "Adresse de recuperation",
+          "Adresse de livraison",
           style: GoogleFonts.poppins(
             textStyle: TextStyle(
               fontSize: 17,
@@ -86,7 +88,7 @@ class _MyMapState extends State<MyMap> {
       body: Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height / 2,
+            height: MediaQuery.of(context).size.height / 1.8,
             width: double.infinity,
             child: myLocation != null
                 ? Stack(
@@ -119,7 +121,19 @@ class _MyMapState extends State<MyMap> {
                             target: LatLng(
                                 myLocation!.latitude!, myLocation!.longitude!),
                           ),
-                          onMapCreated: (GoogleMapController ccontroller) {
+                          onMapCreated:
+                              (GoogleMapController ccontroller) async {
+                            String styleDark =
+                                await DefaultAssetBundle.of(context).loadString(
+                                    'assets/maps/map_style_dark.json');
+                            String styleLight =
+                                await DefaultAssetBundle.of(context).loadString(
+                                    'assets/maps/map_style_light.json');
+                            //customize your map style at: https://mapstyle.withgoogle.com/
+                            Get.isDarkMode
+                                ? ccontroller.setMapStyle(styleDark)
+                                : ccontroller.setMapStyle(styleLight);
+                            //  Completer<GoogleMapController> _controller = Completer();
                             controller = ccontroller;
                           },
                           onCameraMove: (newcameraPosition) {
@@ -209,7 +223,7 @@ class _MyMapState extends State<MyMap> {
               ),
               child: Center(
                 child: Text(
-                  "Choisir",
+                  "Choisir ma position actuelle",
                   style: GoogleFonts.poppins(
                     textStyle: TextStyle(
                       fontSize: 17,

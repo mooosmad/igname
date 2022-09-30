@@ -1,4 +1,6 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
+
+import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
@@ -10,14 +12,14 @@ import 'package:location/location.dart';
 import 'package:map_picker/map_picker.dart';
 import 'package:shimmer/shimmer.dart';
 
-class MyMap2 extends StatefulWidget {
-  const MyMap2({Key? key}) : super(key: key);
+class MyMap extends StatefulWidget {
+  const MyMap({Key? key}) : super(key: key);
 
   @override
-  State<MyMap2> createState() => _MyMap2State();
+  State<MyMap> createState() => _MyMapState();
 }
 
-class _MyMap2State extends State<MyMap2> {
+class _MyMapState extends State<MyMap> {
   GoogleMapController? controller;
   MapPickerController mapPickerController = MapPickerController();
   CameraPosition? cameraPosition;
@@ -74,7 +76,7 @@ class _MyMap2State extends State<MyMap2> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         centerTitle: true,
         title: Text(
-          "Adresse de Livraison",
+          "Adresse de recuperation",
           style: GoogleFonts.poppins(
             textStyle: TextStyle(
               fontSize: 17,
@@ -86,7 +88,7 @@ class _MyMap2State extends State<MyMap2> {
       body: Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height / 2,
+            height: MediaQuery.of(context).size.height / 1.8,
             width: double.infinity,
             child: myLocation != null
                 ? Stack(
@@ -119,7 +121,19 @@ class _MyMap2State extends State<MyMap2> {
                             target: LatLng(
                                 myLocation!.latitude!, myLocation!.longitude!),
                           ),
-                          onMapCreated: (GoogleMapController ccontroller) {
+                          onMapCreated:
+                              (GoogleMapController ccontroller) async {
+                            String styleDark =
+                                await DefaultAssetBundle.of(context).loadString(
+                                    'assets/maps/map_style_dark.json');
+                            String styleLight =
+                                await DefaultAssetBundle.of(context).loadString(
+                                    'assets/maps/map_style_light.json');
+                            //customize your map style at: https://mapstyle.withgoogle.com/
+                            Get.isDarkMode
+                                ? ccontroller.setMapStyle(styleDark)
+                                : ccontroller.setMapStyle(styleLight);
+                            //  Completer<GoogleMapController> _controller = Completer();
                             controller = ccontroller;
                           },
                           onCameraMove: (newcameraPosition) {
@@ -209,7 +223,7 @@ class _MyMap2State extends State<MyMap2> {
               ),
               child: Center(
                 child: Text(
-                  "Choisir",
+                  "Choisir ma position actuelle",
                   style: GoogleFonts.poppins(
                     textStyle: TextStyle(
                       fontSize: 17,
