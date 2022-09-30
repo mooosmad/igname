@@ -96,7 +96,7 @@ class _MyMapState extends State<MyMap> {
                       MapPicker(
                         mapPickerController: mapPickerController,
                         iconWidget: Image.asset(
-                          "assets/images/marker.png",
+                          "assets/icons/marker2.png",
                           width: 45,
                           height: 50,
                           frameBuilder:

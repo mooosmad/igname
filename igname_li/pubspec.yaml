@@ -54,6 +54,8 @@ dependencies:
   map_picker: ^0.0.3
   shimmer: ^2.0.0
   google_static_maps_controller: ^1.0.0
+  awesome_dropdown: ^0.0.4
+ 
  
 
 
@@ -92,6 +94,7 @@ flutter:
       - assets/images/
       - assets/lotties/
       - assets/maps/
+      - assets/icons/
   
   #   - images/a_dot_ham.jpeg
 
