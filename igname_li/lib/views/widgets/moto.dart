@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:igname_li/components/map.dart';
+import 'package:igname_li/components/map2.dart';
 
 class Moto extends StatefulWidget {
   const Moto({Key? key}) : super(key: key);
@@ -58,33 +59,57 @@ class _MotoState extends State<Moto> {
               ),
             ),
             const SizedBox(height: 20),
-            Text(
-              "À partir d'où ?",
-              style: Theme.of(context).textTheme.headline1,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  const Icon(Icons.location_city),
+                  const SizedBox(width: 10),
+                  Text(
+                    "À partir d'où ?",
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 25),
+            const SizedBox(height: 10),
             myMap(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 "Lieu de Recuperation",
                 textAlign: TextAlign.start,
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2!
+                    .copyWith(fontWeight: FontWeight.normal),
               ),
             ),
             const SizedBox(height: 10),
-            Text(
-              "Où ?",
-              style: Theme.of(context).textTheme.headline1,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  const Icon(Icons.location_city_rounded),
+                  const SizedBox(width: 10),
+                  Text(
+                    "Où ?",
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 25),
+            const SizedBox(height: 10),
             myMap(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 "Lieu de Livraison",
                 textAlign: TextAlign.start,
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2!
+                    .copyWith(fontWeight: FontWeight.normal),
               ),
             ),
           ],
@@ -130,7 +155,7 @@ class _MotoState extends State<Moto> {
         child: InkWell(
           onTap: () async {
             final res = await Get.to(
-              const MyMap(),
+              const MyMap2(),
               transition: Transition.size,
             );
             adresseDeLivraison2.value = res ?? "";

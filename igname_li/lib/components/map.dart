@@ -202,9 +202,9 @@ class _MyMapState extends State<MyMap> {
             },
             child: Container(
               height: 50,
-              width: 250,
+              width: 300,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(17),
+                borderRadius: BorderRadius.circular(8),
                 color: const Color(0xfffdc72f),
               ),
               child: Center(
