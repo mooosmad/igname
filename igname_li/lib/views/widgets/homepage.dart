@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:igname_li/models/user.dart';
 import 'package:igname_li/services/api_services.dart';
+import 'package:igname_li/utils/shimmer.dart';
 import 'package:igname_li/views/widgets/camion.dart';
 import 'package:igname_li/views/widgets/car.dart';
 import 'package:igname_li/views/widgets/moto.dart';
@@ -17,15 +18,17 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   // user get
-  List? user;
+  User? user;
 
   getData() async {
-    user = await APIservices().getDataUser();
+    user = await Apiservices().getDataUser();
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     getData();
     super.initState();
   }
@@ -33,138 +36,140 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     print(user);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            "Bienvenue $user",
-            textAlign: TextAlign.start,
-            style: Theme.of(context).textTheme.headline1,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Text(
-            "Choisissez le type d'engins pour votre livraison",
-            textAlign: TextAlign.start,
-            style: Theme.of(context).textTheme.bodyText2,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
+    return user != null
+        ? Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              GestureDetector(
-                onTap: () {
-                  Get.to(const Moto());
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(16),
-                    ),
-                    color: const Color(0xfffdc72f).withOpacity(0.8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.3),
-                        spreadRadius: 2,
-                        blurRadius: 2,
-                        offset:
-                            const Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  height: 150,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        "Moto",
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                      Image.asset("assets/images/motol.png"),
-                    ],
-                  ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Bienvenue ${user!.nom}",
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.headline1,
                 ),
               ),
-              const SizedBox(height: 10),
-              GestureDetector(
-                onTap: () {
-                  Get.to(const Car());
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(8),
-                    ),
-                    color: const Color(0xfffdc72f).withOpacity(0.8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.3),
-                        spreadRadius: 2,
-                        blurRadius: 2,
-                        offset:
-                            const Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  height: 150,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        "Car",
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                      Image.asset("assets/images/car.png"),
-                    ],
-                  ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "Choisissez le type d'engins pour votre livraison",
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
-              const SizedBox(height: 10),
-              GestureDetector(
-                onTap: () {
-                  Get.to(const Camion());
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(8),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(const Moto());
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(16),
+                          ),
+                          color: const Color(0xfffdc72f).withOpacity(0.8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 2,
+                              blurRadius: 2,
+                              offset: const Offset(
+                                  0, 3), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        height: 150,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              "Moto",
+                              style: Theme.of(context).textTheme.bodyText1,
+                            ),
+                            Image.asset("assets/images/motol.png"),
+                          ],
+                        ),
+                      ),
                     ),
-                    color: const Color(0xfffdc72f).withOpacity(0.8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.3),
-                        spreadRadius: 2,
-                        blurRadius: 2,
-                        offset:
-                            const Offset(0, 3), // changes position of shadow
+                    const SizedBox(height: 10),
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(const Car());
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(8),
+                          ),
+                          color: const Color(0xfffdc72f).withOpacity(0.8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 2,
+                              blurRadius: 2,
+                              offset: const Offset(
+                                  0, 3), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        height: 150,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              "Car",
+                              style: Theme.of(context).textTheme.bodyText1,
+                            ),
+                            Image.asset("assets/images/car.png"),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
-                  height: 150,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        "Camion",
-                        style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    const SizedBox(height: 10),
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(const Camion());
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(8),
+                          ),
+                          color: const Color(0xfffdc72f).withOpacity(0.8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 2,
+                              blurRadius: 2,
+                              offset: const Offset(
+                                  0, 3), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        height: 150,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              "Camion",
+                              style: Theme.of(context).textTheme.bodyText1,
+                            ),
+                            Image.asset("assets/images/bus.png"),
+                          ],
+                        ),
                       ),
-                      Image.asset("assets/images/bus.png"),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ),
+              )
             ],
-          ),
-        )
-      ],
-    );
+          )
+        : const Shimmerload();
   }
 }

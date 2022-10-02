@@ -302,7 +302,7 @@ class _SignupState extends State<Signup> {
                               //     contact: contact.text,
                               //     password: password.text);
 
-                              APIservices()
+                              Apiservices()
                                   .registerUser(nom.text, prenom.text,
                                       contact.text, password.text)
                                   .then((check) {

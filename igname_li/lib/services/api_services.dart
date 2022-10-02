@@ -1,12 +1,11 @@
 // ignore_for_file: depend_on_referenced_packages, prefer_typing_uninitialized_variables, unnecessary_string_interpolations, avoid_print, prefer_const_declarations
 
 import 'package:http/http.dart' as http;
-import 'package:igname_li/main.dart';
 import 'package:igname_li/models/user.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class APIservices {
+class Apiservices {
   String serverUrl = "https://iwadeli.herokuapp.com/api";
   var status;
 
@@ -25,7 +24,7 @@ class APIservices {
     print(response.body);
     final Map<String, dynamic> data = json.decode(response.body);
     // return json.decode(response.body);
-    return data;
+    return User.fromMap(data);
   }
 
   Future<List<dynamic>?> loginUser(String contact, String password) async {

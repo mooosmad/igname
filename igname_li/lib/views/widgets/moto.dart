@@ -278,7 +278,7 @@ class _MotoState extends State<Moto> {
   }
 
   Widget myMap2() {
-    const _controller = StaticMapController(
+    const controller = StaticMapController(
       googleApiKey: keymap,
       width: 400,
       height: 100,
@@ -289,7 +289,7 @@ class _MotoState extends State<Moto> {
     /// Get map image provider from controller.
     /// You can also get image url by accessing
     /// `_controller.url` property.
-    ImageProvider<Object> image = _controller.image;
+    ImageProvider<Object> image = controller.image;
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),

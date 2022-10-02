@@ -158,7 +158,7 @@ class _SigninState extends State<Signin> {
                               //   contact: contact.text,
                               //   password: password.text,
                               // );
-                              APIservices()
+                              Apiservices()
                                   .loginUser(contact.text, password.text)
                                   .then((check) {
                                 setState(() {

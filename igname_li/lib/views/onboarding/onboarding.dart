@@ -16,6 +16,7 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xfffdc72f),
       resizeToAvoidBottomInset: false,
       // bottomNavigationBar: Container(
       //   height: 50,
@@ -64,7 +65,7 @@ class _OnBoardingState extends State<OnBoarding> {
         ],
       ),
       body: PageView(
-        physics: const BouncingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         controller: controller,
         children: const [
           OnBoardingPage(

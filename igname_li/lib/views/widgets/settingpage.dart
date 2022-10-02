@@ -7,7 +7,6 @@ import 'package:igname_li/components/loading.dart';
 import 'package:igname_li/main.dart';
 import 'package:igname_li/models/user.dart';
 import 'package:igname_li/services/api_services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -25,12 +24,24 @@ class _SettingPageState extends State<SettingPage> {
     );
   }
 
+  User? user;
+
+  getData() async {
+    user = await Apiservices().getDataUser();
+  }
+
   bool load = false;
   bool isdarkmode = Get.isDarkMode;
 
   @override
+  void initState() {
+    getData();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    User user = box.get("users");
     return load
         ? const Loading()
         : Scaffold(
@@ -82,7 +93,7 @@ class _SettingPageState extends State<SettingPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "${user.prenom} ${user.nom}",
+                                  "${user!.prenom} ${user!.nom}",
                                   style: Theme.of(context).textTheme.bodyText2,
                                 ),
                                 Text(
@@ -176,7 +187,7 @@ class _SettingPageState extends State<SettingPage> {
                           setState(() {
                             load = true;
                           });
-                          APIservices().logout().then((check) {
+                          Apiservices().logout().then((check) {
                             setState(() {
                               load = false;
                             });
