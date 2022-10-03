@@ -20,7 +20,7 @@ class MyMap extends StatefulWidget {
 class _MyMapState extends State<MyMap> {
   GoogleMapController? controller;
   MapPickerController mapPickerController = MapPickerController();
-  CameraPosition? cameraPosition;
+  CameraPosition? cameraPositionRecup;
   PermissionStatus? permissionGranted;
   LocationData? myLocation;
   Location location = Location();
@@ -43,7 +43,7 @@ class _MyMapState extends State<MyMap> {
     }
 
     myLocation = await location.getLocation();
-    cameraPosition = CameraPosition(
+    cameraPositionRecup = CameraPosition(
       zoom: 14,
       target: LatLng(myLocation!.latitude!, myLocation!.longitude!),
     );
@@ -135,7 +135,7 @@ class _MyMapState extends State<MyMap> {
                             controller = ccontroller;
                           },
                           onCameraMove: (newcameraPosition) {
-                            cameraPosition = newcameraPosition;
+                            cameraPositionRecup = newcameraPosition;
                           },
                         ),
                       ),
@@ -199,14 +199,14 @@ class _MyMapState extends State<MyMap> {
           InkWell(
             onTap: () async {
               if (kDebugMode) {
-                print(cameraPosition!.target);
+                print(cameraPositionRecup!.target);
               }
               lieuLivraison = "${await Config().getNameOfQuartier(
-                cameraPosition!.target.latitude,
-                cameraPosition!.target.longitude,
+                cameraPositionRecup!.target.latitude,
+                cameraPositionRecup!.target.longitude,
               )} ${await Config().getNameOfStreet(
-                cameraPosition!.target.latitude,
-                cameraPosition!.target.longitude,
+                cameraPositionRecup!.target.latitude,
+                cameraPositionRecup!.target.longitude,
               )}";
               if (kDebugMode) {
                 print(lieuLivraison);

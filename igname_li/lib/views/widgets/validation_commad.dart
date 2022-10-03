@@ -4,6 +4,9 @@ import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:igname_li/components/loading.dart';
+import 'package:igname_li/components/loadinglivreur.dart';
+import 'package:igname_li/services/api_services.dart';
+import 'package:igname_li/utils/constant.dart';
 
 import 'package:shimmer/shimmer.dart';
 
@@ -11,12 +14,14 @@ class ValidationPage extends StatefulWidget {
   final String? lieuxLivraison;
   final String? lieuxLivraison2;
   final String? moyentPayement;
+  final String? numerodureceveur;
 
   const ValidationPage({
     Key? key,
     this.lieuxLivraison,
     this.moyentPayement,
     this.lieuxLivraison2,
+    this.numerodureceveur,
   }) : super(key: key);
 
   @override
@@ -33,14 +38,14 @@ class _ValidationPageState extends State<ValidationPage> {
             onWillPop: () async {
               return false;
             },
-            child: Loading())
+            child: Loadinglivreur())
         : Scaffold(
             appBar: AppBar(
               backgroundColor: Color(0xfffdc72f),
               elevation: 0,
               title: Text(
                 // "Je valide votre commande",
-                "Validation",
+                "Confirmation",
                 style: TextStyle(color: Colors.white),
               ),
               centerTitle: true,
@@ -59,69 +64,109 @@ class _ValidationPageState extends State<ValidationPage> {
                 myrecap(),
                 SizedBox(height: 20),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Lieux de depart.",
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8),
                   child: Row(
                     children: [
-                      Icon(
-                        Icons.location_on_rounded,
-                        color: Color(0xfffdc72f),
+                      Image.asset(
+                        "assets/icons/partirdou.png",
+                        height: 25,
+                        width: 25,
                       ),
                       SizedBox(width: 10),
-                      Expanded(
-                        child: FittedBox(
-                          child: Text(
-                            widget.lieuxLivraison!,
-                            style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
+                      Text(
+                        widget.lieuxLivraison!,
+                        style: Theme.of(context).textTheme.bodyText2!,
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Lieux de livraison.",
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        "assets/icons/partirdou.png",
+                        height: 25,
+                        width: 25,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        widget.lieuxLivraison2!,
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
                     ],
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 30,
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Text(
+                    "Numero du receveur.",
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Row(
+                    children: [
+                      Icon(Icons.phone, color: maincolor),
+                      SizedBox(width: 10),
+                      Text(
+                        widget.numerodureceveur!,
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 25,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Row(
                     children: [
-                      Icon(
-                        Icons.monetization_on_sharp,
-                        color: Color(0xfffdc72f),
+                      Image.asset(
+                        "assets/icons/payement.png",
+                        height: 25,
+                        width: 25,
                       ),
                       SizedBox(width: 10),
-                      Expanded(
-                        child: FittedBox(
-                          child: Text(
-                            "Moyen de payement : ${widget.moyentPayement!}",
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
+                      Text(
+                        "Moyen de payement : ${widget.moyentPayement!}",
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
                     ],
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 30,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Shimmer.fromColors(
-                    baseColor: Colors.black,
-                    highlightColor: Colors.grey,
+                    baseColor: Get.isDarkMode ? Colors.white : Colors.black,
+                    highlightColor:
+                        Get.isDarkMode ? Colors.grey.shade700 : Colors.grey,
                     child: Text(
-                      "Veuillez Bien lire avant de valider votre commande",
+                      "Lisez bien avant de confirmer votre commande",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                         textStyle: TextStyle(
@@ -141,49 +186,40 @@ class _ValidationPageState extends State<ValidationPage> {
 
   Widget myrecap() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
       width: double.infinity,
-      color: Colors.grey[200],
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Text(
-            "Recap.",
-            style: GoogleFonts.poppins(
-              textStyle: TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
-              ),
+      decoration: BoxDecoration(
+        // borderRadius: const BorderRadius.all(
+        //   Radius.circular(8),
+        // ),
+        color: Get.isDarkMode ? Colors.grey.shade800 : Colors.grey[200],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              "Recapitulatif.",
+              style: Theme.of(context).textTheme.headline2,
             ),
-          ),
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Livraison",
-                style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                    fontSize: 17,
-                  ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Prix de la livraison",
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.only(right: 5),
-                child: Text(
+                Text(
                   "1000 FCFA",
-                  style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                      fontSize: 17,
-                    ),
-                  ),
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -194,6 +230,12 @@ class _ValidationPageState extends State<ValidationPage> {
         onTap: () async {
           setState(() {
             load = true;
+            Apiservices().addOrder(
+                "details",
+                "${widget.lieuxLivraison}",
+                "${widget.lieuxLivraison2}",
+                "${widget.numerodureceveur}",
+                "${widget.moyentPayement}");
           });
           // test api create commande ok
           // final r = await APIservices().createCommande(
@@ -222,19 +264,22 @@ class _ValidationPageState extends State<ValidationPage> {
         },
         child: Container(
           height: 50,
-          width: 250,
+          width: 300,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(17),
-            color: Colors.yellow,
+            borderRadius: BorderRadius.circular(8),
+            color: maincolor,
           ),
           child: Center(
-            child: Text(
-              "Je valide ma commande",
-              style: GoogleFonts.poppins(
-                textStyle: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Je confirme ma commande",
+                style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

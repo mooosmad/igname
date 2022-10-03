@@ -101,6 +101,28 @@ class Apiservices {
     return check;
   }
 
+  void addOrder(String details, String lieuDeDepart, String lieuDeLivraison,
+      String contactDuReceveur, String montant) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'access_token';
+    final value = prefs.get(key) ?? 0;
+
+    String myUrl = "$serverUrl/products";
+    http.post(Uri.parse(myUrl), headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $value'
+    }, body: {
+      "details": "$details",
+      "lieudedepart": "$lieuDeDepart",
+      "lieudeLivraison": "$lieuDeLivraison",
+      "contactdudestinataire": "$contactDuReceveur",
+      "montant": "$montant",
+    }).then((response) {
+      print('Response status : ${response.statusCode}');
+      print('Response body : ${response.body}');
+    });
+  }
+
   _save(String token) async {
     final prefs = await SharedPreferences.getInstance();
     final key = 'access_token';

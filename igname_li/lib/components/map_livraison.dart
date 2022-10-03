@@ -20,12 +20,13 @@ class MyMap2 extends StatefulWidget {
 class _MyMap2State extends State<MyMap2> {
   GoogleMapController? controller;
   MapPickerController mapPickerController = MapPickerController();
-  CameraPosition? cameraPosition;
+  CameraPosition? cameraPositionLivraison;
   PermissionStatus? permissionGranted;
   LocationData? myLocation;
   Location location = Location();
   bool? serviceEnabled;
   String lieuLivraison = "";
+
   checkPermission() async {
     serviceEnabled = await location.serviceEnabled();
     if (!serviceEnabled!) {
@@ -43,7 +44,7 @@ class _MyMap2State extends State<MyMap2> {
     }
 
     myLocation = await location.getLocation();
-    cameraPosition = CameraPosition(
+    cameraPositionLivraison = CameraPosition(
       zoom: 14,
       target: LatLng(myLocation!.latitude!, myLocation!.longitude!),
     );
@@ -135,7 +136,7 @@ class _MyMap2State extends State<MyMap2> {
                             controller = ccontroller;
                           },
                           onCameraMove: (newcameraPosition) {
-                            cameraPosition = newcameraPosition;
+                            cameraPositionLivraison = newcameraPosition;
                           },
                         ),
                       ),
@@ -199,15 +200,16 @@ class _MyMap2State extends State<MyMap2> {
           InkWell(
             onTap: () async {
               if (kDebugMode) {
-                print(cameraPosition!.target);
+                print(cameraPositionLivraison!.target);
               }
               lieuLivraison = "${await Config().getNameOfQuartier(
-                cameraPosition!.target.latitude,
-                cameraPosition!.target.longitude,
+                cameraPositionLivraison!.target.latitude,
+                cameraPositionLivraison!.target.longitude,
               )} ${await Config().getNameOfStreet(
-                cameraPosition!.target.latitude,
-                cameraPosition!.target.longitude,
+                cameraPositionLivraison!.target.latitude,
+                cameraPositionLivraison!.target.longitude,
               )}";
+
               if (kDebugMode) {
                 print(lieuLivraison);
               }

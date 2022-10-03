@@ -26,227 +26,242 @@ class _MotoState extends State<Moto> {
 
   RxString value = "espece".obs;
   TextEditingController contactRecepteur = TextEditingController();
+  final formGlobalKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Livraison à moto"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: ListView(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(8),
-                ),
-                color: const Color(0xfffdc72f).withOpacity(0.7),
-                // boxShadow: [
-                //   BoxShadow(
-                //     color: Colors.grey.withOpacity(0.3),
-                //     spreadRadius: 2,
-                //     blurRadius: 2,
-                //     offset: const Offset(0, 3), // changes position of shadow
-                //   ),
-                // ],
-              ),
-              height: 60,
-              width: Get.height * 0.8,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  Icon(Icons.delivery_dining),
-                  Text(
-                    "Si votre commande entre dans notre sac à dos,\nOn peut vous livrer. Si non choisissez voiture...",
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    softWrap: true,
+    return Obx((() {
+      return Scaffold(
+        appBar: AppBar(title: const Text("Livraison à moto")),
+        body: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: ListView(
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(8),
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 25),
-            Text(
-              "Votre commande",
-              style: Theme.of(context).textTheme.headline2,
-            ),
-            const SizedBox(height: 25),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const Icon(Icons.location_city),
-                  const SizedBox(width: 10),
-                  Text(
-                    "À partir d'où ?",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline2!
-                        .copyWith(fontWeight: FontWeight.w400),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10),
-            myMap(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Lieu de recuperation $adresseDeLivraison",
-                textAlign: TextAlign.start,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2!
-                    .copyWith(fontWeight: FontWeight.normal),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const Icon(Icons.location_city_rounded),
-                  const SizedBox(width: 10),
-                  Text(
-                    "Où ?",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline2!
-                        .copyWith(fontWeight: FontWeight.w400),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10),
-            myMap2(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Lieu de livraison $adresseDeLivraison2",
-                textAlign: TextAlign.start,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2!
-                    .copyWith(fontWeight: FontWeight.normal),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Container(
-              alignment: Alignment.center,
-              margin: const EdgeInsets.symmetric(horizontal: 8),
-              child: TextFormField(
-                style: GoogleFonts.poppins(
-                  fontSize: 15,
-                  color: Get.isDarkMode ? Colors.white : Colors.black,
-                ),
-                controller: contactRecepteur,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Champ vide";
-                  }
-                  return null;
-                },
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  // fillColor: Get.isDarkMode
-                  //     ? Colors.grey.shade100
-                  //     : Colors.grey.shade200,
-                  filled: false,
-                  // border: OutlineInputBorder(
-                  //     borderRadius: BorderRadius.circular(8),
-                  //     borderSide: BorderSide.none),
-                  // focusedBorder: OutlineInputBorder(
-                  //   borderSide: BorderSide(
-                  //     color: Get.isDarkMode ? Colors.white : Colors.black,
+                  color: const Color(0xfffdc72f).withOpacity(0.7),
+                  // boxShadow: [
+                  //   BoxShadow(
+                  //     color: Colors.grey.withOpacity(0.3),
+                  //     spreadRadius: 2,
+                  //     blurRadius: 2,
+                  //     offset: const Offset(0, 3), // changes position of shadow
                   //   ),
-                  // ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color:
-                          Get.isDarkMode ? Colors.white : Colors.grey.shade300,
+                  // ],
+                ),
+                height: 60,
+                width: Get.height * 0.8,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: const [
+                    Icon(Icons.delivery_dining),
+                    Text(
+                      "Si votre commande entre dans notre sac à dos,\nOn peut vous livrer. Si non choisissez voiture...",
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      softWrap: true,
                     ),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color:
-                          Get.isDarkMode ? Colors.white : Colors.grey.shade500,
+                  ],
+                ),
+              ),
+              const SizedBox(height: 25),
+              Text(
+                "Votre commande",
+                style: Theme.of(context).textTheme.headline2,
+              ),
+              const SizedBox(height: 25),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/icons/partirdou.png",
+                      height: 25,
+                      width: 25,
                     ),
-                  ),
-                  // border: UnderlineInputBorder(
-                  //   borderSide: BorderSide(
-                  //     color: Get.isDarkMode ? Colors.white : Colors.black,
-                  //   ),
-                  // ),
-                  hintText: 'Ajoutez le numero de telephone du recepteur ',
-                  hintStyle: Theme.of(context)
+                    const SizedBox(width: 10),
+                    Text(
+                      "À partir d'où ?",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline2!
+                          .copyWith(fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              myMap(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Lieu de recuperation $adresseDeLivraison",
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context)
                       .textTheme
                       .bodyText2!
-                      .copyWith(color: Colors.grey.shade400),
-                  prefixIcon: const Icon(Icons.phone_android_rounded),
+                      .copyWith(fontWeight: FontWeight.normal),
                 ),
-                cursorColor: Get.isDarkMode ? Colors.white : Colors.black,
               ),
-            ),
-            const SizedBox(height: 25),
-            myrecap(),
-            const SizedBox(height: 25),
-            Text(
-              "Moyen de paiement",
-              style: Theme.of(context).textTheme.headline2,
-            ),
-            const SizedBox(height: 25),
-            payementDrop(),
-            const SizedBox(height: 25),
-            GestureDetector(
-              onTap: () {
-                if (adresseDeLivraison.isEmpty && adresseDeLivraison2.isEmpty) {
-                  Fluttertoast.showToast(
-                    msg:
-                        "Veuillez choisir un lieu de livraison avant de commander.",
-                    backgroundColor: maincolor,
-                    gravity: ToastGravity.TOP,
-                  );
-                } else {
-                  Get.to(
-                    ValidationPage(
-                      lieuxLivraison: adresseDeLivraison.value,
-                      lieuxLivraison2: adresseDeLivraison2.value,
-                      moyentPayement: value.value,
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/icons/partirdou.png",
+                      height: 25,
+                      width: 25,
                     ),
-                    transition: Transition.rightToLeft,
-                    popGesture: true,
-                  );
-                }
-              },
-              child: Container(
-                height: 50,
-                width: 350,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: const Color(0xfffdc72f),
+                    const SizedBox(width: 10),
+                    Text(
+                      "Où ?",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline2!
+                          .copyWith(fontWeight: FontWeight.w400),
+                    ),
+                  ],
                 ),
-                child: Center(
-                  child: Text(
-                    "Je valide ma commande",
-                    style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
+              ),
+              const SizedBox(height: 10),
+              myMap2(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Lieu de livraison $adresseDeLivraison2",
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2!
+                      .copyWith(fontWeight: FontWeight.normal),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Container(
+                alignment: Alignment.center,
+                margin: const EdgeInsets.symmetric(horizontal: 8),
+                child: TextFormField(
+                  key: formGlobalKey,
+                  style: GoogleFonts.poppins(
+                    fontSize: 15,
+                    color: Get.isDarkMode ? Colors.white : Colors.black,
+                  ),
+                  controller: contactRecepteur,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Champ vide";
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    // fillColor: Get.isDarkMode
+                    //     ? Colors.grey.shade100
+                    //     : Colors.grey.shade200,
+                    filled: false,
+                    // border: OutlineInputBorder(
+                    //     borderRadius: BorderRadius.circular(8),
+                    //     borderSide: BorderSide.none),
+                    // focusedBorder: OutlineInputBorder(
+                    //   borderSide: BorderSide(
+                    //     color: Get.isDarkMode ? Colors.white : Colors.black,
+                    //   ),
+                    // ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Get.isDarkMode
+                            ? Colors.white
+                            : Colors.grey.shade300,
+                      ),
+                    ),
+
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Get.isDarkMode
+                            ? Colors.white
+                            : Colors.grey.shade500,
+                      ),
+                    ),
+                    // border: UnderlineInputBorder(
+                    //   borderSide: BorderSide(
+                    //     color: Get.isDarkMode ? Colors.white : Colors.black,
+                    //   ),
+                    // ),
+                    hintText: 'Ajoutez le numero de telephone du recepteur ',
+                    hintStyle: Theme.of(context)
+                        .textTheme
+                        .bodyText2!
+                        .copyWith(color: Colors.grey.shade400),
+                    prefixIcon: const Icon(Icons.phone_android_rounded),
+                  ),
+                  cursorColor: Get.isDarkMode ? Colors.white : Colors.black,
+                ),
+              ),
+              const SizedBox(height: 25),
+              myrecap(),
+              const SizedBox(height: 25),
+              Text(
+                "Moyen de paiement",
+                style: Theme.of(context).textTheme.headline2,
+              ),
+              const SizedBox(height: 25),
+              payementDrop(),
+              const SizedBox(height: 25),
+              GestureDetector(
+                onTap: () {
+                  if (adresseDeLivraison.isEmpty &&
+                      adresseDeLivraison2.isEmpty) {
+                    Fluttertoast.showToast(
+                      msg:
+                          "Veuillez choisir un lieu de livraison avant de commander.",
+                      backgroundColor: maincolor,
+                      gravity: ToastGravity.TOP,
+                    );
+                  } else {
+                    Get.to(
+                      ValidationPage(
+                        lieuxLivraison: adresseDeLivraison.value,
+                        lieuxLivraison2: adresseDeLivraison2.value,
+                        moyentPayement: value.value,
+                        numerodureceveur: contactRecepteur.text,
+                      ),
+                      transition: Transition.rightToLeft,
+                      popGesture: true,
+                    );
+                  }
+                },
+                child: Container(
+                  height: 50,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: const Color(0xfffdc72f),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Je valide ma commande",
+                      style: GoogleFonts.poppins(
+                        textStyle: const TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }));
   }
 
   Widget myMap() {
