@@ -328,7 +328,7 @@ class _MotoState extends State<Moto> {
         borderRadius: const BorderRadius.all(
           Radius.circular(8),
         ),
-        color: Colors.grey[200],
+        color: Get.isDarkMode ? Colors.grey.shade800 : Colors.grey[200],
       ),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -380,7 +380,7 @@ class _MotoState extends State<Moto> {
       hint: const Text("Espèce"),
       style: Theme.of(context).textTheme.bodyText2,
       decoration: InputDecoration(
-        fillColor: Colors.grey[200],
+        fillColor: Get.isDarkMode ? Colors.grey.shade800 : Colors.grey[200],
         filled: true,
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),

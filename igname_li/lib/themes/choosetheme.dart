@@ -40,7 +40,7 @@ class _ChooseThemePageState extends State<ChooseThemePage> {
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: ListView(
+        child: Column(
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height / 2,
@@ -63,10 +63,10 @@ class _ChooseThemePageState extends State<ChooseThemePage> {
             ),
             const SizedBox(height: 10),
             Text(
-              "Choisissez le theme qui vous convient le mieux",
+              "Selectionnez le theme qui vous convient le mieux",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                    color: Colors.grey,
+                    color: Colors.blueGrey.shade400,
                   ),
             ),
             const SizedBox(height: 10),

@@ -4,7 +4,9 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:igname_li/components/loading.dart';
+import 'package:igname_li/controller/controller.dart';
 import 'package:igname_li/views/widgets/homepage.dart';
+import 'package:igname_li/views/widgets/mes_commandes.dart';
 import 'package:igname_li/views/widgets/settingpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,7 +24,7 @@ class _HomeState extends State<Home> {
 
   static List<Widget> pages = <Widget>[
     const Homepage(),
-    Container(),
+    OrderPage(),
     const SettingPage(),
   ];
   void _incrementCounter() {
@@ -43,6 +45,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(GetUserDataController(), permanent: true);
     return load
         ? const Loading()
         : Scaffold(

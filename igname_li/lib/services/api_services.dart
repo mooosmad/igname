@@ -11,7 +11,7 @@ class Apiservices {
 
   var token;
 
-  Future getDataUser() async {
+  Future<User> getDataUser() async {
     final prefs = await SharedPreferences.getInstance();
     final key = 'access_token';
     final value = prefs.get(key) ?? 0;

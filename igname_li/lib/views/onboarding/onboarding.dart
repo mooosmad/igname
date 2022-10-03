@@ -65,7 +65,7 @@ class _OnBoardingState extends State<OnBoarding> {
         ],
       ),
       body: PageView(
-        physics: const ClampingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         controller: controller,
         children: const [
           OnBoardingPage(

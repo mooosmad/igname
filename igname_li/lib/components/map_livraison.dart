@@ -165,8 +165,9 @@ class _MyMap2State extends State<MyMap2> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
             child: Shimmer.fromColors(
-              baseColor: Colors.black,
-              highlightColor: Colors.grey,
+              baseColor: Get.isDarkMode ? Colors.white : Colors.black,
+              highlightColor:
+                  Get.isDarkMode ? Colors.grey.shade700 : Colors.grey,
               child: Text(
                 "Veuillez Glissez le marker sur le point où vous souhaitez être livré",
                 textAlign: TextAlign.center,
