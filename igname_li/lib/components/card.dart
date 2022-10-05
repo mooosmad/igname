@@ -30,6 +30,7 @@ class ItemCard extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 5),
                   child: iconWidget,
                 ),
+                const SizedBox(width: 20),
                 Text(
                   title,
                   style: Theme.of(context).textTheme.bodyText2,

@@ -107,7 +107,7 @@ class Apiservices {
     final key = 'access_token';
     final value = prefs.get(key) ?? 0;
 
-    String myUrl = "$serverUrl/products";
+    String myUrl = "$serverUrl/addCopie";
     http.post(Uri.parse(myUrl), headers: {
       'Accept': 'application/json',
       'Authorization': 'Bearer $value'

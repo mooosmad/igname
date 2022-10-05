@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:igname_li/components/loading.dart';
 import 'package:igname_li/controller/controller.dart';
 import 'package:igname_li/views/widgets/homepage.dart';
+import 'package:igname_li/views/widgets/homepage2.dart';
 import 'package:igname_li/views/widgets/mes_commandes.dart';
 import 'package:igname_li/views/widgets/settingpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,7 +24,7 @@ class _HomeState extends State<Home> {
   int _counter = 0;
 
   static List<Widget> pages = <Widget>[
-    const Homepage(),
+    Homepage(),
     OrderPage(),
     const SettingPage(),
   ];

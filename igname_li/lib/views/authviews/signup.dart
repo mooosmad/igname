@@ -251,6 +251,8 @@ class _SignupState extends State<Signup> {
                             },
                             style: GoogleFonts.poppins(
                               fontSize: 15,
+                              color:
+                                  Get.isDarkMode ? Colors.white : Colors.black,
                             ),
                             obscureText: _obscureRText,
                             decoration: InputDecoration(

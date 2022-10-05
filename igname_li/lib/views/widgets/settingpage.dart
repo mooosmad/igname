@@ -6,7 +6,6 @@ import 'package:igname_li/components/card.dart';
 import 'package:igname_li/components/loading.dart';
 import 'package:igname_li/controller/controller.dart';
 import 'package:igname_li/main.dart';
-import 'package:igname_li/models/user.dart';
 import 'package:igname_li/services/api_services.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -66,12 +65,17 @@ class _SettingPageState extends State<SettingPage> {
                         const SizedBox(
                           height: 10,
                         ),
-                        SizedBox(
-                          height: 50,
+                        Padding(
+                          padding: const EdgeInsets.all(8),
                           child: Row(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
+                              Container(
+                                width: 54,
+                                height: 54,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.grey,
+                                ),
                                 child: Icon(
                                   Icons.person,
                                   size: 40,
@@ -80,6 +84,7 @@ class _SettingPageState extends State<SettingPage> {
                                       : Colors.black,
                                 ),
                               ),
+                              const SizedBox(width: 20),
                               Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
@@ -90,7 +95,7 @@ class _SettingPageState extends State<SettingPage> {
                                           "${controller.user.value!.prenom} ${controller.user.value!.nom}",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText2,
+                                              .bodyText1,
                                         )
                                       : Get.isDarkMode
                                           ? Shimmer.fromColors(
@@ -119,21 +124,27 @@ class _SettingPageState extends State<SettingPage> {
                                                 height: 10,
                                               ),
                                             ),
+                                  const SizedBox(height: 5),
                                   Text(
-                                    "Voir Profiles",
-                                    style:
-                                        Theme.of(context).textTheme.bodyText2,
+                                    "Mon profiles",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText2!
+                                        .copyWith(
+                                            color: Colors.blueGrey.shade400,
+                                            fontSize: 12),
                                   ),
                                 ],
                               )
                             ],
                           ),
                         ),
+                        const Divider(thickness: 1),
                         const SizedBox(
-                          height: 40,
+                          height: 10,
                         ),
                         Container(
-                          padding: const EdgeInsets.only(left: 16),
+                          padding: const EdgeInsets.all(16),
                           child: const Text(
                             'Autres',
                             style: TextStyle(
@@ -160,7 +171,10 @@ class _SettingPageState extends State<SettingPage> {
                               ? Colors.black26
                               : Colors.grey.shade200,
                           rightWidget: _arrow(),
-                          iconWidget: Container(),
+                          iconWidget: Icon(
+                            Icons.info_sharp,
+                            color: Get.isDarkMode ? Colors.white : Colors.black,
+                          ),
                         ),
                         ItemCard(
                           title: 'Contactez nous',
@@ -242,7 +256,7 @@ class _SettingPageState extends State<SettingPage> {
                           height: 40,
                         ),
                         ItemCard(
-                          title: 'version',
+                          title: 'Version',
                           color: Get.isDarkMode
                               ? Colors.black26
                               : Colors.grey.shade200,
@@ -253,7 +267,10 @@ class _SettingPageState extends State<SettingPage> {
                                   fontWeight: FontWeight.normal,
                                 )),
                           ),
-                          iconWidget: Container(),
+                          iconWidget: Icon(
+                            Icons.vertical_align_bottom,
+                            color: Get.isDarkMode ? Colors.white : Colors.black,
+                          ),
                         ),
                         const SizedBox(
                           height: 200,

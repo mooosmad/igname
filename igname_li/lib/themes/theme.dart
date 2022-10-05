@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class ThemeIgname {
@@ -7,6 +8,13 @@ class ThemeIgname {
       backgroundColor: Color(0xfffafafa),
       foregroundColor: Colors.black,
       elevation: 0,
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: Colors.white,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
     ),
     colorScheme: const ColorScheme.light().copyWith(
       primary: const Color(0xfffdc72f),
@@ -78,6 +86,13 @@ class ThemeIgname {
     appBarTheme: const AppBarTheme(
       backgroundColor: Color.fromARGB(255, 29, 29, 30),
       elevation: 0,
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.light,
+        systemNavigationBarColor: Colors.black,
+        systemNavigationBarIconBrightness: Brightness.light,
+      ),
     ),
     shadowColor: Colors.black.withOpacity(0.1),
     dialogTheme: const DialogTheme(

@@ -64,7 +64,7 @@ class _HomepageState extends State<Homepage> {
                             color: const Color(0xfffdc72f).withOpacity(0.8),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.3),
+                                color: Colors.grey.withOpacity(0.1),
                                 spreadRadius: 2,
                                 blurRadius: 2,
                                 offset: const Offset(
@@ -99,7 +99,7 @@ class _HomepageState extends State<Homepage> {
                             color: const Color(0xfffdc72f).withOpacity(0.8),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.3),
+                                color: Colors.grey.withOpacity(0.1),
                                 spreadRadius: 2,
                                 blurRadius: 2,
                                 offset: const Offset(
@@ -134,7 +134,7 @@ class _HomepageState extends State<Homepage> {
                             color: const Color(0xfffdc72f).withOpacity(0.8),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.3),
+                                color: Colors.grey.withOpacity(0.1),
                                 spreadRadius: 2,
                                 blurRadius: 2,
                                 offset: const Offset(
