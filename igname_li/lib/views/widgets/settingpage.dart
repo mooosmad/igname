@@ -20,7 +20,7 @@ class _SettingPageState extends State<SettingPage> {
   Widget _arrow() {
     return Icon(
       Icons.arrow_forward_ios,
-      size: 20.0,
+      size: 15.0,
       color: Get.isDarkMode ? Colors.white : Colors.black,
     );
   }
@@ -131,11 +131,19 @@ class _SettingPageState extends State<SettingPage> {
                                         .textTheme
                                         .bodyText2!
                                         .copyWith(
-                                            color: Colors.blueGrey.shade400,
+                                            color: Colors.blueGrey.shade200,
                                             fontSize: 12),
                                   ),
                                 ],
-                              )
+                              ),
+                              const SizedBox(width: 180),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15.0,
+                                color: Get.isDarkMode
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
                             ],
                           ),
                         ),
@@ -171,10 +179,17 @@ class _SettingPageState extends State<SettingPage> {
                               ? Colors.black26
                               : Colors.grey.shade200,
                           rightWidget: _arrow(),
-                          iconWidget: Icon(
-                            Icons.info_sharp,
-                            color: Get.isDarkMode ? Colors.white : Colors.black,
-                          ),
+                          iconWidget: Get.isDarkMode
+                              ? Image.asset(
+                                  "assets/icons/light/apro.png",
+                                  height: 30,
+                                  width: 30,
+                                )
+                              : Image.asset(
+                                  "assets/icons/dark/apro.png",
+                                  height: 30,
+                                  width: 30,
+                                ),
                         ),
                         ItemCard(
                           title: 'Contactez nous',
@@ -182,10 +197,17 @@ class _SettingPageState extends State<SettingPage> {
                               ? Colors.black26
                               : Colors.grey.shade200,
                           rightWidget: _arrow(),
-                          iconWidget: Icon(
-                            Icons.call,
-                            color: Get.isDarkMode ? Colors.white : Colors.black,
-                          ),
+                          iconWidget: Get.isDarkMode
+                              ? Image.asset(
+                                  "assets/icons/light/contact.png",
+                                  height: 30,
+                                  width: 30,
+                                )
+                              : Image.asset(
+                                  "assets/icons/dark/contact.png",
+                                  height: 30,
+                                  width: 30,
+                                ),
                         ),
                         ItemCard(
                           title: 'Aides',
@@ -193,10 +215,17 @@ class _SettingPageState extends State<SettingPage> {
                               ? Colors.black26
                               : Colors.grey.shade200,
                           rightWidget: Container(),
-                          iconWidget: Icon(
-                            Icons.help,
-                            color: Get.isDarkMode ? Colors.white : Colors.black,
-                          ),
+                          iconWidget: Get.isDarkMode
+                              ? Image.asset(
+                                  "assets/icons/light/aide.png",
+                                  height: 30,
+                                  width: 30,
+                                )
+                              : Image.asset(
+                                  "assets/icons/dark/aide.png",
+                                  height: 30,
+                                  width: 30,
+                                ),
                         ),
                         ItemCard(
                           title: 'Mode Sombre',
@@ -217,10 +246,17 @@ class _SettingPageState extends State<SettingPage> {
                               );
                             },
                           ),
-                          iconWidget: Icon(
-                            Icons.dark_mode,
-                            color: Get.isDarkMode ? Colors.white : Colors.black,
-                          ),
+                          iconWidget: Get.isDarkMode
+                              ? Image.asset(
+                                  "assets/icons/light/light.png",
+                                  height: 30,
+                                  width: 30,
+                                )
+                              : Image.asset(
+                                  "assets/icons/dark/light.png",
+                                  height: 30,
+                                  width: 30,
+                                ),
                         ),
                         GestureDetector(
                           onTap: () {
@@ -245,11 +281,17 @@ class _SettingPageState extends State<SettingPage> {
                                 ? Colors.black26
                                 : Colors.grey.shade200,
                             rightWidget: Container(),
-                            iconWidget: Icon(
-                              Icons.logout,
-                              color:
-                                  Get.isDarkMode ? Colors.white : Colors.black,
-                            ),
+                            iconWidget: Get.isDarkMode
+                                ? Image.asset(
+                                    "assets/icons/light/deco.png",
+                                    height: 30,
+                                    width: 30,
+                                  )
+                                : Image.asset(
+                                    "assets/icons/dark/deco.png",
+                                    height: 30,
+                                    width: 30,
+                                  ),
                           ),
                         ),
                         const SizedBox(
@@ -267,10 +309,17 @@ class _SettingPageState extends State<SettingPage> {
                                   fontWeight: FontWeight.normal,
                                 )),
                           ),
-                          iconWidget: Icon(
-                            Icons.vertical_align_bottom,
-                            color: Get.isDarkMode ? Colors.white : Colors.black,
-                          ),
+                          iconWidget: Get.isDarkMode
+                              ? Image.asset(
+                                  "assets/icons/light/version.png",
+                                  height: 30,
+                                  width: 30,
+                                )
+                              : Image.asset(
+                                  "assets/icons/dark/version.png",
+                                  height: 30,
+                                  width: 30,
+                                ),
                         ),
                         const SizedBox(
                           height: 200,

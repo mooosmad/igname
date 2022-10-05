@@ -71,14 +71,22 @@ class _HomeState extends State<Home> {
               }),
               items: <BottomNavyBarItem>[
                 BottomNavyBarItem(
-                  icon: const Icon(Icons.apps),
+                  icon: Image.asset(
+                    "assets/icons/light/home.png",
+                    height: 30,
+                    width: 30,
+                  ),
                   title: const Text('Home'),
                   activeColor: const Color(0xfffdc72f),
                   textAlign: TextAlign.center,
                   inactiveColor: Colors.grey,
                 ),
                 BottomNavyBarItem(
-                  icon: const Icon(Icons.list_alt_outlined),
+                  icon: Image.asset(
+                    "assets/icons/light/order.png",
+                    height: 30,
+                    width: 30,
+                  ),
                   title: const Text('Commandes'),
                   activeColor: const Color(0xfffdc72f),
                   textAlign: TextAlign.center,
@@ -93,7 +101,11 @@ class _HomeState extends State<Home> {
                 //   textAlign: TextAlign.center,
                 // ),
                 BottomNavyBarItem(
-                  icon: const Icon(Icons.settings),
+                  icon: Image.asset(
+                    "assets/icons/light/setting.png",
+                    height: 30,
+                    width: 30,
+                  ),
                   title: const Text('Parametres'),
                   activeColor: const Color(0xfffdc72f),
                   textAlign: TextAlign.center,

@@ -316,8 +316,10 @@ class _SignupState extends State<Signup> {
                                       msg: "Inscription effectué avec succés");
                                   Get.to(const Home());
                                 } else {
-                                  Fluttertoast.showToast(msg: "${check[1]}");
-                                  Get.to(const Signup());
+                                  Fluttertoast.showToast(
+                                      msg:
+                                          "Vous avez déja un compte, veuillez vous connecter");
+                                  Get.to(const Signin());
                                 }
                               });
                             } else {

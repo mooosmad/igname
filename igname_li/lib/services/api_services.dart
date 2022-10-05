@@ -69,7 +69,8 @@ class Apiservices {
         "password": "$password"
       },
     );
-    status = response.body.contains('error');
+    status = response.statusCode;
+    print(status);
 
     var data = json.decode(response.body);
 
@@ -84,20 +85,15 @@ class Apiservices {
     //   Fluttertoast.showToast(msg: "${data["error"]}");
     // }
 
-    if (status) {
+    if (status == 200) {
+      print('data : ${data["access_token"]}');
+      check = [false, '${data["message"]}'];
+      _save(data["access_token"]);
+      check = [true, "${data["message"]}"];
+    } else {
       print('data : ${data["message"]}');
       check = [false, '${data["message"]}'];
-    } else {
-      print('data : ${data["access_token"]}');
-      _save(data["access_token"]);
-      // await box.put(
-      //   'users',
-      //   User(nom: nom, prenom: prenom, contact: contact, password: password),
-      // );
-      // print(box.get('users'));
-      check = [true, "${data["message"]}"];
     }
-
     return check;
   }
 

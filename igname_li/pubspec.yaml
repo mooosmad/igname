@@ -96,6 +96,9 @@ flutter:
       - assets/lotties/
       - assets/maps/
       - assets/icons/
+      - assets/icons/dark/
+      - assets/icons/light/
+      - assets/icons/home/
   
   #   - images/a_dot_ham.jpeg
 
