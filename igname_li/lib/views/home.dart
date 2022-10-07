@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
   int _counter = 0;
 
   static List<Widget> pages = <Widget>[
-    Homepage(),
+    const Homepage(),
     OrderPage(),
     const SettingPage(),
   ];
