@@ -7,6 +7,7 @@ import 'package:igname_li/components/loading.dart';
 import 'package:igname_li/controller/controller.dart';
 import 'package:igname_li/main.dart';
 import 'package:igname_li/services/api_services.dart';
+import 'package:igname_li/views/widgets/about.dart';
 import 'package:igname_li/views/widgets/profile.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -183,23 +184,28 @@ class _SettingPageState extends State<SettingPage> {
                         //   rightWidget: _arrow(),
                         //   iconWidget: Container(),
                         // ),
-                        ItemCard(
-                          title: 'À propos de nous',
-                          color: Get.isDarkMode
-                              ? Colors.black26
-                              : Colors.grey.shade200,
-                          rightWidget: _arrow(),
-                          iconWidget: Get.isDarkMode
-                              ? Image.asset(
-                                  "assets/icons/light/apro.png",
-                                  height: 30,
-                                  width: 30,
-                                )
-                              : Image.asset(
-                                  "assets/icons/dark/apro.png",
-                                  height: 30,
-                                  width: 30,
-                                ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(AboutPage());
+                          },
+                          child: ItemCard(
+                            title: 'À propos de nous',
+                            color: Get.isDarkMode
+                                ? Colors.black26
+                                : Colors.grey.shade200,
+                            rightWidget: _arrow(),
+                            iconWidget: Get.isDarkMode
+                                ? Image.asset(
+                                    "assets/icons/light/apro.png",
+                                    height: 30,
+                                    width: 30,
+                                  )
+                                : Image.asset(
+                                    "assets/icons/dark/apro.png",
+                                    height: 30,
+                                    width: 30,
+                                  ),
+                          ),
                         ),
                         ItemCard(
                           title: 'Contactez nous',

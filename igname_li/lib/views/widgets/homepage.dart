@@ -62,43 +62,47 @@ class _HomepageState extends State<Homepage> {
     print("mon print perso ${controller.user.value}");
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 1,
+        toolbarHeight: 0,
       ),
       body: Obx(() {
         return controller.user.value != null
-            ? Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Bienvenue ${controller.user.value!.prenom}",
-                        textAlign: TextAlign.start,
-                        style: Theme.of(context).textTheme.headline1,
+            ? Container(
+                color: Get.isDarkMode ? Colors.black26 : Colors.grey.shade200,
+                height: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Bienvenue ${controller.user.value!.prenom}",
+                          textAlign: TextAlign.start,
+                          style: Theme.of(context).textTheme.headline1,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Text(
-                        "Choisissez le type d'engins pour votre livraison",
-                        textAlign: TextAlign.start,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText2!
-                            .copyWith(color: Colors.blueGrey.shade300),
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text(
+                          "Choisissez le type d'engins pour votre livraison",
+                          textAlign: TextAlign.start,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2!
+                              .copyWith(color: Colors.blueGrey.shade300),
+                        ),
                       ),
-                    ),
-                    LiveList.options(
-                      options: options,
-                      itemBuilder: buildAnimatedItem,
-                      scrollDirection: Axis.vertical,
-                      itemCount: 3,
-                      shrinkWrap: true,
-                    ),
-                  ],
+                      LiveList.options(
+                        options: options,
+                        itemBuilder: buildAnimatedItem,
+                        scrollDirection: Axis.vertical,
+                        itemCount: 3,
+                        shrinkWrap: true,
+                      ),
+                    ],
+                  ),
                 ),
               )
             : const Shimmerload();

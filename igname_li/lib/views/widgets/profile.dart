@@ -109,7 +109,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           : Colors.grey.shade200,
                       rightWidget: _arrow(),
                     ),
-                    const Divider(thickness: 2),
+                    const Divider(thickness: 2, endIndent: 10, indent: 10),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
@@ -129,7 +129,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           : Colors.grey.shade200,
                       rightWidget: _arrow(),
                     ),
-                    const Divider(thickness: 2),
+                    const Divider(thickness: 2, endIndent: 10, indent: 10),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
@@ -148,7 +148,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           : Colors.grey.shade200,
                       rightWidget: _arrow(),
                     ),
-                    const Divider(thickness: 2),
+                    const Divider(thickness: 2, endIndent: 10, indent: 10),
                   ],
                 ),
               ),
