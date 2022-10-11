@@ -7,6 +7,7 @@ import 'package:igname_li/components/loading.dart';
 import 'package:igname_li/controller/controller.dart';
 import 'package:igname_li/main.dart';
 import 'package:igname_li/services/api_services.dart';
+import 'package:igname_li/views/widgets/profile.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SettingPage extends StatefulWidget {
@@ -65,86 +66,95 @@ class _SettingPageState extends State<SettingPage> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 54,
-                                height: 54,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.grey,
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(ProfilePage());
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 54,
+                                  height: 54,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.grey,
+                                  ),
+                                  child: Icon(
+                                    Icons.person,
+                                    size: 40,
+                                    color: Get.isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
+                                  ),
                                 ),
-                                child: Icon(
-                                  Icons.person,
-                                  size: 40,
+                                const SizedBox(width: 20),
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    controller.user.value != null
+                                        ? Text(
+                                            "${controller.user.value!.prenom} ${controller.user.value!.nom}",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
+                                          )
+                                        : Get.isDarkMode
+                                            ? Shimmer.fromColors(
+                                                baseColor: Colors.grey[800]!,
+                                                highlightColor:
+                                                    Colors.grey[600]!,
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    color: Colors.white,
+                                                  ),
+                                                  width: 80,
+                                                  height: 10,
+                                                ),
+                                              )
+                                            : Shimmer.fromColors(
+                                                baseColor: Colors.grey[300]!,
+                                                highlightColor:
+                                                    Colors.grey[100]!,
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    color: Colors.white,
+                                                  ),
+                                                  width: 80,
+                                                  height: 10,
+                                                ),
+                                              ),
+                                    const SizedBox(height: 5),
+                                    Text(
+                                      "Mon profiles",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText2!
+                                          .copyWith(
+                                              color: Colors.blueGrey.shade200,
+                                              fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(width: 180),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 15.0,
                                   color: Get.isDarkMode
                                       ? Colors.white
                                       : Colors.black,
                                 ),
-                              ),
-                              const SizedBox(width: 20),
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  controller.user.value != null
-                                      ? Text(
-                                          "${controller.user.value!.prenom} ${controller.user.value!.nom}",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1,
-                                        )
-                                      : Get.isDarkMode
-                                          ? Shimmer.fromColors(
-                                              baseColor: Colors.grey[800]!,
-                                              highlightColor: Colors.grey[600]!,
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Colors.white,
-                                                ),
-                                                width: 80,
-                                                height: 10,
-                                              ),
-                                            )
-                                          : Shimmer.fromColors(
-                                              baseColor: Colors.grey[300]!,
-                                              highlightColor: Colors.grey[100]!,
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Colors.white,
-                                                ),
-                                                width: 80,
-                                                height: 10,
-                                              ),
-                                            ),
-                                  const SizedBox(height: 5),
-                                  Text(
-                                    "Mon profiles",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText2!
-                                        .copyWith(
-                                            color: Colors.blueGrey.shade200,
-                                            fontSize: 12),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(width: 180),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                size: 15.0,
-                                color: Get.isDarkMode
-                                    ? Colors.white
-                                    : Colors.black,
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         const Divider(thickness: 1),

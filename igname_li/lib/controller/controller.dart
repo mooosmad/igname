@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:igname_li/models/user.dart';
 import 'package:igname_li/services/api_services.dart';
-import 'package:igname_li/services/config.dart';
 
 class GetUserDataController extends GetxController {
   final user = Rx<User?>(null);

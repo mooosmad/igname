@@ -75,7 +75,7 @@ class _HomepageState extends State<Homepage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Bienvenue ${controller.user.value!.nom}",
+                        "Bienvenue ${controller.user.value!.prenom}",
                         textAlign: TextAlign.start,
                         style: Theme.of(context).textTheme.headline1,
                       ),
@@ -152,7 +152,7 @@ class _HomepageState extends State<Homepage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      "${titles[index]}",
+                      titles[index],
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                     images[index],
