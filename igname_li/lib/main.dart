@@ -16,7 +16,7 @@ late Box box;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
-  String? theme = prefs.getString('theme') ?? 'light';
+  String? theme = prefs.getString('theme') ?? 'dark';
   isFirst = prefs.getBool('isFirst') ?? true;
   // hive initialisation
   // final document = await getApplicationDocumentsDirectory();

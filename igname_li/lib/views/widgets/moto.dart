@@ -1,7 +1,7 @@
 // ignore_for_file: unrelated_type_equality_checks, avoid_print, use_build_context_synchronously
 
 import 'dart:async';
-
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -23,20 +23,9 @@ class Moto extends StatefulWidget {
 class _MotoState extends State<Moto> {
   final Completer<GoogleMapController> _controller = Completer();
 
-  // static const CameraPosition _kGooglePlex = CameraPosition(
-  //   target: LatLng(5.302402020561021, -3.9691663585557824),
-  //   zoom: 14.4746,
-  // );
-
-  // static const CameraPosition _kLake = CameraPosition(
-  //     bearing: 192.8334901395799,
-  //     target: LatLng(5.302402020561021, -3.9691663585557824),
-  //     tilt: 59.440717697143555,
-  //     zoom: 19.151926040649414);
+  RxString adresseDeRecuperation = "".obs;
 
   RxString adresseDeLivraison = "".obs;
-
-  RxString adresseDeLivraison2 = "".obs;
 
   RxString value = "espece".obs;
 
@@ -44,10 +33,16 @@ class _MotoState extends State<Moto> {
   final formGlobalKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final maincontroller = Get.put(MainController(), permanent: true);
-    print(maincontroller.latLivraison);
-    return Obx((() {
-      return Scaffold(
+    Get.put(MainController(), permanent: true);
+    final maincontroller = Get.find<MainController>();
+    maincontroller.distance.value = calculateDistance(
+        maincontroller.latLivraison.value,
+        maincontroller.longLivraison.value,
+        maincontroller.latRecuperation.value,
+        maincontroller.longRecuperation.value);
+    print(" la distance est ${maincontroller.distance.value}");
+    return Obx(
+      () => Scaffold(
         appBar: AppBar(title: const Text("Livraison à moto")),
         body: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -124,7 +119,7 @@ class _MotoState extends State<Moto> {
                         const MyMapRecup(),
                         transition: Transition.size,
                       );
-                      adresseDeLivraison.value = res ?? "";
+                      adresseDeRecuperation.value = res ?? "";
                       if (res != null) {
                         Fluttertoast.showToast(msg: "choix effectué");
                       }
@@ -135,15 +130,11 @@ class _MotoState extends State<Moto> {
                         child: GoogleMap(
                           mapType: MapType.normal,
                           initialCameraPosition: CameraPosition(
-                            target: LatLng(
-                                double.parse(
-                                    maincontroller.latRecuperation.value),
-                                double.parse(
-                                    maincontroller.longRecuperation.value)),
+                            target: LatLng(maincontroller.latRecuperation.value,
+                                maincontroller.longRecuperation.value),
                             zoom: 14.4746,
                           ),
-                          onMapCreated:
-                              (GoogleMapController ccontroller) async {
+                          onMapCreated: (GoogleMapController controller) async {
                             String styleDark =
                                 await DefaultAssetBundle.of(context).loadString(
                                     'assets/maps/map_style_dark.json');
@@ -152,10 +143,10 @@ class _MotoState extends State<Moto> {
                                     'assets/maps/map_style_light.json');
                             //customize your map style at: https://mapstyle.withgoogle.com/
                             Get.isDarkMode
-                                ? ccontroller.setMapStyle(styleDark)
-                                : ccontroller.setMapStyle(styleLight);
+                                ? controller.setMapStyle(styleDark)
+                                : controller.setMapStyle(styleLight);
                             //  Completer<GoogleMapController> _controller = Completer();
-                            _controller.complete(ccontroller);
+                            // _controller.complete(controller);
                           },
                         ),
                       ),
@@ -166,7 +157,7 @@ class _MotoState extends State<Moto> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Lieu de recuperation : $adresseDeLivraison",
+                  "Lieu de recuperation : $adresseDeRecuperation",
                   textAlign: TextAlign.start,
                   style: Theme.of(context)
                       .textTheme
@@ -196,49 +187,51 @@ class _MotoState extends State<Moto> {
                 ),
               ),
               const SizedBox(height: 10),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: SizedBox(
-                  height: 100,
-                  width: double.infinity,
-                  child: InkWell(
-                    onTap: () async {
-                      final res = await Get.to(
-                        const MyMapLivraison(),
-                        transition: Transition.size,
-                      );
-                      adresseDeLivraison2.value = res ?? "";
-                      if (res != null) {
-                        Fluttertoast.showToast(msg: "choix effectué");
-                      }
-                    },
-                    child: IgnorePointer(
-                      child: SizedBox(
-                        height: 100,
-                        child: GoogleMap(
-                          mapType: MapType.normal,
-                          initialCameraPosition: CameraPosition(
-                            target: LatLng(
-                                double.parse(maincontroller.latLivraison.value),
-                                double.parse(
-                                    maincontroller.longLivraison.value)),
-                            zoom: 14.4746,
+              Obx(
+                () => ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: SizedBox(
+                    height: 100,
+                    width: double.infinity,
+                    child: InkWell(
+                      onTap: () async {
+                        final res = await Get.to(
+                          const MyMapLivraison(),
+                          transition: Transition.size,
+                        );
+                        adresseDeLivraison.value = res ?? "";
+                        if (res != null) {
+                          Fluttertoast.showToast(msg: "choix effectué");
+                        }
+                      },
+                      child: IgnorePointer(
+                        child: SizedBox(
+                          height: 100,
+                          child: GoogleMap(
+                            mapType: MapType.normal,
+                            initialCameraPosition: CameraPosition(
+                              target: LatLng(maincontroller.latLivraison.value,
+                                  maincontroller.longLivraison.value),
+                              zoom: 14.4746,
+                            ),
+                            onMapCreated:
+                                (GoogleMapController controller) async {
+                              String styleDark =
+                                  await DefaultAssetBundle.of(context)
+                                      .loadString(
+                                          'assets/maps/map_style_dark.json');
+                              String styleLight =
+                                  await DefaultAssetBundle.of(context)
+                                      .loadString(
+                                          'assets/maps/map_style_light.json');
+                              //customize your map style at: https://mapstyle.withgoogle.com/
+                              Get.isDarkMode
+                                  ? controller.setMapStyle(styleDark)
+                                  : controller.setMapStyle(styleLight);
+                              //  Completer<GoogleMapController> _controller = Completer();
+                              // _controller.complete(controllerli);
+                            },
                           ),
-                          onMapCreated:
-                              (GoogleMapController ccontroller) async {
-                            String styleDark =
-                                await DefaultAssetBundle.of(context).loadString(
-                                    'assets/maps/map_style_dark.json');
-                            String styleLight =
-                                await DefaultAssetBundle.of(context).loadString(
-                                    'assets/maps/map_style_light.json');
-                            //customize your map style at: https://mapstyle.withgoogle.com/
-                            Get.isDarkMode
-                                ? ccontroller.setMapStyle(styleDark)
-                                : ccontroller.setMapStyle(styleLight);
-                            //  Completer<GoogleMapController> _controller = Completer();
-                            _controller.complete(ccontroller);
-                          },
                         ),
                       ),
                     ),
@@ -248,7 +241,7 @@ class _MotoState extends State<Moto> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Lieu de livraison : $adresseDeLivraison2",
+                  "Lieu de livraison : $adresseDeLivraison",
                   textAlign: TextAlign.start,
                   style: Theme.of(context)
                       .textTheme
@@ -348,9 +341,32 @@ class _MotoState extends State<Moto> {
                             style: Theme.of(context).textTheme.bodyText2,
                           ),
                           Text(
-                            "1000 FCFA  ",
+                            maincontroller.distance.value <= 0.0
+                                ? "0 FCFA"
+                                : maincontroller.distance.value <= 4.0
+                                    ? maincontroller.prix.value = "1000"
+                                    : maincontroller.distance.value > 4.0 &&
+                                            maincontroller
+                                                    .distance.value <=
+                                                10.0
+                                        ? maincontroller.prix.value = "1500"
+                                        : maincontroller.distance.value > 10.0 &&
+                                                maincontroller
+                                                        .distance.value <=
+                                                    17.0
+                                            ? maincontroller.prix.value = "2000"
+                                            : maincontroller
+                                                            .distance.value >
+                                                        17.0 &&
+                                                    maincontroller
+                                                            .distance.value <=
+                                                        40.0
+                                                ? maincontroller.prix.value =
+                                                    "2500"
+                                                : maincontroller.prix.value =
+                                                    "3000",
                             style: Theme.of(context).textTheme.bodyText2,
-                          ),
+                          )
                         ],
                       )
                     ],
@@ -367,8 +383,8 @@ class _MotoState extends State<Moto> {
               const SizedBox(height: 25),
               GestureDetector(
                 onTap: () {
-                  if (adresseDeLivraison.isEmpty &&
-                      adresseDeLivraison2.isEmpty) {
+                  if (adresseDeRecuperation.isEmpty &&
+                      adresseDeLivraison.isEmpty) {
                     Fluttertoast.showToast(
                       msg:
                           "Veuillez choisir un lieu de livraison avant de commander.",
@@ -378,10 +394,11 @@ class _MotoState extends State<Moto> {
                   } else {
                     Get.to(
                       ValidationPage(
+                        lieuxRecuperation: adresseDeRecuperation.value,
                         lieuxLivraison: adresseDeLivraison.value,
-                        lieuxLivraison2: adresseDeLivraison2.value,
                         moyentPayement: value.value,
                         numerodureceveur: contactRecepteur.text,
+                        prixdelivraison: maincontroller.prix.value,
                       ),
                       transition: Transition.rightToLeft,
                       popGesture: true,
@@ -412,8 +429,8 @@ class _MotoState extends State<Moto> {
             ],
           ),
         ),
-      );
-    }));
+      ),
+    );
   }
 
   Widget payementDrop() {
@@ -454,5 +471,14 @@ class _MotoState extends State<Moto> {
         print(value);
       },
     );
+  }
+
+  double calculateDistance(lat1, lon1, lat2, lon2) {
+    var p = 0.017453292519943295;
+    var c = cos;
+    var a = 0.5 -
+        c((lat2 - lat1) * p) / 2 +
+        c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
+    return 12742 * asin(sqrt(a));
   }
 }

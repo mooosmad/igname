@@ -211,10 +211,10 @@ class _MyMapRecupState extends State<MyMapRecup> {
                 cameraPositionRecup!.target.latitude,
                 cameraPositionRecup!.target.longitude,
               )}";
-              maincontroller.latRecuperation.value =
-                  "${cameraPositionRecup!.target.longitude}";
               maincontroller.longRecuperation.value =
-                  "${cameraPositionRecup!.target.latitude}";
+                  cameraPositionRecup!.target.longitude;
+              maincontroller.latRecuperation.value =
+                  cameraPositionRecup!.target.latitude;
               if (kDebugMode) {
                 print(lieuRecuperation);
                 print(maincontroller.latRecuperation);

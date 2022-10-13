@@ -59,11 +59,11 @@ class _HomepageState extends State<Homepage> {
     //
     final controller = Get.find<GetUserDataController>();
     print("mon print perso ${controller.user.value}");
-    return Scaffold(
-      body: Obx(() {
-        return controller.user.value == null
-            ? const Shimmerload()
-            : SizedBox(
+    return Obx(() {
+      return controller.user.value == null
+          ? const Shimmerload()
+          : Scaffold(
+              body: SizedBox(
                 // color: Get.isDarkMode ? Colors.black26 : Colors.grey.shade200,
                 height: double.infinity,
                 child: Padding(
@@ -101,9 +101,9 @@ class _HomepageState extends State<Homepage> {
                     ],
                   ),
                 ),
-              );
-      }),
-    );
+              ),
+            );
+    });
   }
 
   // Build animated item (helper for all examples)

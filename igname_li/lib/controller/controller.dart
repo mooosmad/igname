@@ -16,8 +16,14 @@ class GetUserDataController extends GetxController {
 
 class MainController extends GetxController {
   final load = false.obs;
-  var longLivraison = "".obs;
-  var latLivraison = "".obs;
-  var longRecuperation = "".obs;
-  var latRecuperation = "".obs;
+  RxDouble distance = 0.0.obs;
+  RxDouble longLivraison = 0.0.obs;
+  RxDouble latLivraison = 0.0.obs;
+  RxDouble longRecuperation = 0.0.obs;
+  RxDouble latRecuperation = 0.0.obs;
+  RxString prix = "".obs;
+  @override
+  void onInit() {
+    super.onInit();
+  }
 }

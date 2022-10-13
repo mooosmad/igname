@@ -13,27 +13,29 @@ class AboutPage extends StatelessWidget {
       body: Container(
         color: Get.isDarkMode ? Colors.black26 : Colors.grey.shade200,
         height: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Text("Prumad",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView(
+              shrinkWrap: true,
+              children: const [
+                Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 8.0),
+                    child: Text("Prumad",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 18)),
+                  ),
                 ),
-              ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Text("These are the most important society",
-                      style: TextStyle(fontSize: 14)),
+                Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 8.0),
+                    child: Text("These are the most important society",
+                        style: TextStyle(fontSize: 14)),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

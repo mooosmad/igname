@@ -56,7 +56,7 @@ class _HomeState extends State<Home> {
               // resizeToAvoidBottomInset: true,
               body: SafeArea(child: pages[_currentIndex]),
               bottomNavigationBar:
-                  mainController.load.value || controller.user.value == null
+                  mainController.load.value && controller.user.value == null
                       ? Container()
                       : BottomNavyBar(
                           selectedIndex: _currentIndex,

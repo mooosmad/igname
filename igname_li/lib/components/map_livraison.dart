@@ -212,10 +212,10 @@ class _MyMapLivraisonState extends State<MyMapLivraison> {
                 cameraPositionLivraison!.target.latitude,
                 cameraPositionLivraison!.target.longitude,
               )}";
-              maincontroller.latLivraison.value =
-                  "${cameraPositionLivraison!.target.longitude}";
               maincontroller.longLivraison.value =
-                  "${cameraPositionLivraison!.target.latitude}";
+                  cameraPositionLivraison!.target.longitude;
+              maincontroller.latLivraison.value =
+                  cameraPositionLivraison!.target.latitude;
               if (kDebugMode) {
                 print(lieuLivraison);
                 print(maincontroller.latLivraison);

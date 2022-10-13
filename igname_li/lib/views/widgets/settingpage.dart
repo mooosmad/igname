@@ -211,7 +211,7 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(const Staticmap());
+                            // Get.to(const Staticmap());
                           },
                           child: ItemCard(
                             title: 'Contactez nous',
