@@ -16,14 +16,28 @@ class GetUserDataController extends GetxController {
 
 class MainController extends GetxController {
   final load = false.obs;
-  RxDouble distance = 0.0.obs;
-  RxDouble longLivraison = 0.0.obs;
-  RxDouble latLivraison = 0.0.obs;
-  RxDouble longRecuperation = 0.0.obs;
-  RxDouble latRecuperation = 0.0.obs;
-  RxString prix = "".obs;
+  final distance = 0.0.obs;
+  final longLivraison = 0.0.obs;
+  final latLivraison = 0.0.obs;
+  final longRecuperation = 0.0.obs;
+  final latRecuperation = 0.0.obs;
+  final prix = "".obs;
   @override
   void onInit() {
     super.onInit();
+    print("***************MAIN CONTROLLER****************");
+    print(longLivraison.value);
+    print(latLivraison.value);
+    print(longRecuperation.value);
+    print(latRecuperation.value);
+  }
+
+  deleteLatLngValue() {
+    distance.value = 0.0;
+    longLivraison.value = 0.0;
+    latLivraison.value = 0.0;
+    longRecuperation.value = 0.0;
+    latRecuperation.value = 0.0;
+    prix.value = "";
   }
 }

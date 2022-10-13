@@ -70,7 +70,7 @@ class _MyMapRecupState extends State<MyMapRecup> {
 
   @override
   Widget build(BuildContext context) {
-    final maincontroller = Get.put(MainController());
+    final maincontroller = Get.find<MainController>();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -216,6 +216,8 @@ class _MyMapRecupState extends State<MyMapRecup> {
               maincontroller.latRecuperation.value =
                   cameraPositionRecup!.target.latitude;
               if (kDebugMode) {
+                print(
+                    "************LOG CHOISIR MA POSITION ACTUELLE****************");
                 print(lieuRecuperation);
                 print(maincontroller.latRecuperation);
                 print(maincontroller.longRecuperation);

@@ -70,7 +70,8 @@ class _MyMapLivraisonState extends State<MyMapLivraison> {
 
   @override
   Widget build(BuildContext context) {
-    final maincontroller = Get.put(MainController());
+    final maincontroller = Get.find<MainController>();
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
