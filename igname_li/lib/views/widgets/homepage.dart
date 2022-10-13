@@ -2,6 +2,7 @@
 
 import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:igname_li/controller/controller.dart';
 import 'package:igname_li/utils/shimmer.dart';
@@ -126,6 +127,7 @@ class _HomepageState extends State<Homepage> {
         // Paste you Widget
         child: GestureDetector(
           onTap: () {
+            HapticFeedback.lightImpact();
             Get.to(view[index]);
           },
           child: Column(

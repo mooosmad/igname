@@ -54,6 +54,7 @@ class _ValidationPageState extends State<ValidationPage> {
                 ),
               ),
               body: ListView(
+                shrinkWrap: true,
                 children: [
                   SizedBox(height: 20),
                   Padding(
@@ -270,9 +271,7 @@ class _ValidationPageState extends State<ValidationPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
+                  SizedBox(height: 30),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Shimmer.fromColors(
@@ -293,6 +292,9 @@ class _ValidationPageState extends State<ValidationPage> {
                   ),
                   SizedBox(height: 20),
                   myButton(),
+                  SizedBox(
+                    height: 30,
+                  ),
                 ],
               ),
             ),
