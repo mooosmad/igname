@@ -314,7 +314,7 @@ class _SignupState extends State<Signup> {
                                 if (check![0]) {
                                   Fluttertoast.showToast(
                                       msg: "Inscription effectué avec succés");
-                                  Get.off(const Home());
+                                  Get.offAll(const Home());
                                 } else {
                                   Fluttertoast.showToast(
                                       msg:

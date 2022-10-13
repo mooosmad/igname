@@ -1,15 +1,16 @@
-// ignore_for_file: unrelated_type_equality_checks
+// ignore_for_file: unrelated_type_equality_checks, avoid_print, use_build_context_synchronously
+
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_static_maps_controller/google_static_maps_controller.dart';
-import 'package:igname_li/components/loading.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:igname_li/components/map_recuperation.dart';
 import 'package:igname_li/components/map_livraison.dart';
+import 'package:igname_li/controller/controller.dart';
 import 'package:igname_li/utils/constant.dart';
-import 'package:igname_li/utils/utils.dart';
 import 'package:igname_li/views/widgets/validation_commad.dart';
 
 class Moto extends StatefulWidget {
@@ -20,15 +21,31 @@ class Moto extends StatefulWidget {
 }
 
 class _MotoState extends State<Moto> {
+  final Completer<GoogleMapController> _controller = Completer();
+
+  // static const CameraPosition _kGooglePlex = CameraPosition(
+  //   target: LatLng(5.302402020561021, -3.9691663585557824),
+  //   zoom: 14.4746,
+  // );
+
+  // static const CameraPosition _kLake = CameraPosition(
+  //     bearing: 192.8334901395799,
+  //     target: LatLng(5.302402020561021, -3.9691663585557824),
+  //     tilt: 59.440717697143555,
+  //     zoom: 19.151926040649414);
+
   RxString adresseDeLivraison = "".obs;
 
   RxString adresseDeLivraison2 = "".obs;
 
   RxString value = "espece".obs;
+
   TextEditingController contactRecepteur = TextEditingController();
   final formGlobalKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final maincontroller = Get.put(MainController(), permanent: true);
+    print(maincontroller.latLivraison);
     return Obx((() {
       return Scaffold(
         appBar: AppBar(title: const Text("Livraison à moto")),
@@ -96,11 +113,60 @@ class _MotoState extends State<Moto> {
                 ),
               ),
               const SizedBox(height: 10),
-              myMap(),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: SizedBox(
+                  height: 100,
+                  width: double.infinity,
+                  child: InkWell(
+                    onTap: () async {
+                      final res = await Get.to(
+                        const MyMapRecup(),
+                        transition: Transition.size,
+                      );
+                      adresseDeLivraison.value = res ?? "";
+                      if (res != null) {
+                        Fluttertoast.showToast(msg: "choix effectué");
+                      }
+                    },
+                    child: IgnorePointer(
+                      child: SizedBox(
+                        height: 100,
+                        child: GoogleMap(
+                          mapType: MapType.normal,
+                          initialCameraPosition: CameraPosition(
+                            target: LatLng(
+                                double.parse(
+                                    maincontroller.latRecuperation.value),
+                                double.parse(
+                                    maincontroller.longRecuperation.value)),
+                            zoom: 14.4746,
+                          ),
+                          onMapCreated:
+                              (GoogleMapController ccontroller) async {
+                            String styleDark =
+                                await DefaultAssetBundle.of(context).loadString(
+                                    'assets/maps/map_style_dark.json');
+                            String styleLight =
+                                await DefaultAssetBundle.of(context).loadString(
+                                    'assets/maps/map_style_light.json');
+                            //customize your map style at: https://mapstyle.withgoogle.com/
+                            Get.isDarkMode
+                                ? ccontroller.setMapStyle(styleDark)
+                                : ccontroller.setMapStyle(styleLight);
+                            //  Completer<GoogleMapController> _controller = Completer();
+                            _controller.complete(ccontroller);
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Lieu de recuperation $adresseDeLivraison",
+                  "Lieu de recuperation : $adresseDeLivraison",
                   textAlign: TextAlign.start,
                   style: Theme.of(context)
                       .textTheme
@@ -130,11 +196,59 @@ class _MotoState extends State<Moto> {
                 ),
               ),
               const SizedBox(height: 10),
-              myMap2(),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: SizedBox(
+                  height: 100,
+                  width: double.infinity,
+                  child: InkWell(
+                    onTap: () async {
+                      final res = await Get.to(
+                        const MyMapLivraison(),
+                        transition: Transition.size,
+                      );
+                      adresseDeLivraison2.value = res ?? "";
+                      if (res != null) {
+                        Fluttertoast.showToast(msg: "choix effectué");
+                      }
+                    },
+                    child: IgnorePointer(
+                      child: SizedBox(
+                        height: 100,
+                        child: GoogleMap(
+                          mapType: MapType.normal,
+                          initialCameraPosition: CameraPosition(
+                            target: LatLng(
+                                double.parse(maincontroller.latLivraison.value),
+                                double.parse(
+                                    maincontroller.longLivraison.value)),
+                            zoom: 14.4746,
+                          ),
+                          onMapCreated:
+                              (GoogleMapController ccontroller) async {
+                            String styleDark =
+                                await DefaultAssetBundle.of(context).loadString(
+                                    'assets/maps/map_style_dark.json');
+                            String styleLight =
+                                await DefaultAssetBundle.of(context).loadString(
+                                    'assets/maps/map_style_light.json');
+                            //customize your map style at: https://mapstyle.withgoogle.com/
+                            Get.isDarkMode
+                                ? ccontroller.setMapStyle(styleDark)
+                                : ccontroller.setMapStyle(styleLight);
+                            //  Completer<GoogleMapController> _controller = Completer();
+                            _controller.complete(ccontroller);
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Lieu de livraison $adresseDeLivraison2",
+                  "Lieu de livraison : $adresseDeLivraison2",
                   textAlign: TextAlign.start,
                   style: Theme.of(context)
                       .textTheme
@@ -204,7 +318,45 @@ class _MotoState extends State<Moto> {
                 ),
               ),
               const SizedBox(height: 25),
-              myrecap(),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(8),
+                  ),
+                  color:
+                      Get.isDarkMode ? Colors.grey.shade800 : Colors.grey[200],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        "Recapitulatif.",
+                        style: Theme.of(context).textTheme.headline2,
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Prix de la livraison estimé",
+                            style: Theme.of(context).textTheme.bodyText2,
+                          ),
+                          Text(
+                            "1000 FCFA  ",
+                            style: Theme.of(context).textTheme.bodyText2,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
               const SizedBox(height: 25),
               Text(
                 "Moyen de paiement",
@@ -262,117 +414,6 @@ class _MotoState extends State<Moto> {
         ),
       );
     }));
-  }
-
-  Widget myMap() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(8),
-      child: SizedBox(
-        height: 100,
-        width: double.infinity,
-        child: InkWell(
-          onTap: () async {
-            final res = await Get.to(
-              const MyMap(),
-              transition: Transition.size,
-            );
-            adresseDeLivraison.value = res ?? "";
-            if (res != null) {
-              Fluttertoast.showToast(msg: "choix effectué");
-            }
-          },
-          child: IgnorePointer(
-            child: Image.asset(
-              "assets/images/illustration.jpg",
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget myMap2() {
-    const controller = StaticMapController(
-      googleApiKey: keymap,
-      width: 400,
-      height: 100,
-      zoom: 10,
-      center: Location(-3.1178833, -60.0029284),
-    );
-
-    /// Get map image provider from controller.
-    /// You can also get image url by accessing
-    /// `_controller.url` property.
-    ImageProvider<Object> image = controller.image;
-
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(8),
-      child: SizedBox(
-        height: 100,
-        width: double.infinity,
-        child: InkWell(
-          onTap: () async {
-            final res = await Get.to(
-              const MyMap2(),
-              transition: Transition.size,
-            );
-            adresseDeLivraison2.value = res ?? "";
-            if (res != null) {
-              Fluttertoast.showToast(msg: "choix effectué");
-            }
-          },
-          child: IgnorePointer(
-            child: adresseDeLivraison2 == null
-                ? const Loading()
-                : Image.asset(
-                    "assets/images/illustration.jpg",
-                    fit: BoxFit.cover,
-                  ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget myrecap() {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(
-          Radius.circular(8),
-        ),
-        color: Get.isDarkMode ? Colors.grey.shade800 : Colors.grey[200],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text(
-              "Recapitulatif.",
-              style: Theme.of(context).textTheme.headline2,
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Prix de la livraison estimé",
-                  style: Theme.of(context).textTheme.bodyText2,
-                ),
-                Text(
-                  "1000 FCFA",
-                  style: Theme.of(context).textTheme.bodyText2,
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
   }
 
   Widget payementDrop() {

@@ -13,3 +13,11 @@ class GetUserDataController extends GetxController {
     super.onInit();
   }
 }
+
+class MainController extends GetxController {
+  final load = false.obs;
+  var longLivraison = "".obs;
+  var latLivraison = "".obs;
+  var longRecuperation = "".obs;
+  var latRecuperation = "".obs;
+}

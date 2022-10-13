@@ -167,7 +167,7 @@ class _SigninState extends State<Signin> {
                                 if (check![0]) {
                                   Fluttertoast.showToast(
                                       msg: "Vous êtes connecté");
-                                  Get.to(const Home());
+                                  Get.offAll(const Home());
                                 } else {
                                   Fluttertoast.showToast(msg: "${check[1]}");
                                   Get.to(const Signin());

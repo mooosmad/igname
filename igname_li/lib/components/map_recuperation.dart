@@ -5,19 +5,20 @@ import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:igname_li/controller/controller.dart';
 import 'package:igname_li/services/config.dart';
 import 'package:location/location.dart';
 import 'package:map_picker/map_picker.dart';
 import 'package:shimmer/shimmer.dart';
 
-class MyMap extends StatefulWidget {
-  const MyMap({Key? key}) : super(key: key);
+class MyMapRecup extends StatefulWidget {
+  const MyMapRecup({Key? key}) : super(key: key);
 
   @override
-  State<MyMap> createState() => _MyMapState();
+  State<MyMapRecup> createState() => _MyMapRecupState();
 }
 
-class _MyMapState extends State<MyMap> {
+class _MyMapRecupState extends State<MyMapRecup> {
   GoogleMapController? controller;
   MapPickerController mapPickerController = MapPickerController();
   CameraPosition? cameraPositionRecup;
@@ -25,7 +26,8 @@ class _MyMapState extends State<MyMap> {
   LocationData? myLocation;
   Location location = Location();
   bool? serviceEnabled;
-  String lieuLivraison = "";
+  String lieuRecuperation = "";
+
   checkPermission() async {
     serviceEnabled = await location.serviceEnabled();
     if (!serviceEnabled!) {
@@ -68,6 +70,7 @@ class _MyMapState extends State<MyMap> {
 
   @override
   Widget build(BuildContext context) {
+    final maincontroller = Get.put(MainController());
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -201,17 +204,23 @@ class _MyMapState extends State<MyMap> {
               if (kDebugMode) {
                 print(cameraPositionRecup!.target);
               }
-              lieuLivraison = "${await Config().getNameOfQuartier(
+              lieuRecuperation = "${await Config().getNameOfQuartier(
                 cameraPositionRecup!.target.latitude,
                 cameraPositionRecup!.target.longitude,
               )} ${await Config().getNameOfStreet(
                 cameraPositionRecup!.target.latitude,
                 cameraPositionRecup!.target.longitude,
               )}";
+              maincontroller.latRecuperation.value =
+                  "${cameraPositionRecup!.target.longitude}";
+              maincontroller.longRecuperation.value =
+                  "${cameraPositionRecup!.target.latitude}";
               if (kDebugMode) {
-                print(lieuLivraison);
+                print(lieuRecuperation);
+                print(maincontroller.latRecuperation);
+                print(maincontroller.longRecuperation);
               }
-              Get.back(result: lieuLivraison);
+              Get.back(result: lieuRecuperation);
             },
             child: Container(
               height: 50,

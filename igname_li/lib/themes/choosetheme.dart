@@ -34,7 +34,7 @@ class _ChooseThemePageState extends State<ChooseThemePage> {
           final prefs = await SharedPreferences.getInstance();
           prefs.setBool('isFirst', false);
           changeTheme(Get.isDarkMode);
-          Get.off(const AuthenticationPage());
+          Get.offAll(const AuthenticationPage());
         },
         child: const Icon(Icons.arrow_forward_rounded),
       ),
@@ -45,7 +45,7 @@ class _ChooseThemePageState extends State<ChooseThemePage> {
             SizedBox(
               height: MediaQuery.of(context).size.height / 2,
               child: Lottie.asset(
-                "assets/lotties/darkmode.json",
+                "assets/lotties/weather.json",
                 frameBuilder: ((context, child, composition) {
                   return composition != null
                       ? child

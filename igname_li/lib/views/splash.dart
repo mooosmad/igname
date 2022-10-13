@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:igname_li/main.dart';
 import 'package:igname_li/views/authviews/authentication.dart';
-import 'package:igname_li/views/onboarding/onboarding.dart';
+import 'package:igname_li/views/onboarding/onboard.dart';
 
 class MySplashScreen extends StatefulWidget {
   const MySplashScreen({Key? key}) : super(key: key);
@@ -19,7 +19,8 @@ class _MySplashScreenState extends State<MySplashScreen> {
       splash: 'assets/images/logo.png',
       splashIconSize: 250,
       backgroundColor: Get.isDarkMode ? Colors.black : Colors.white,
-      nextScreen: isFirst ? const OnBoarding() : const AuthenticationPage(),
+      nextScreen:
+          isFirst ? const OnboardingPageSimple() : const AuthenticationPage(),
       splashTransition: SplashTransition.slideTransition,
     );
   }

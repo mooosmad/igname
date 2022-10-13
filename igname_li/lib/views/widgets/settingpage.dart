@@ -8,6 +8,7 @@ import 'package:igname_li/controller/controller.dart';
 import 'package:igname_li/main.dart';
 import 'package:igname_li/services/api_services.dart';
 import 'package:igname_li/views/widgets/about.dart';
+import 'package:igname_li/views/widgets/staticmap.dart';
 import 'package:igname_li/views/widgets/profile.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -27,14 +28,14 @@ class _SettingPageState extends State<SettingPage> {
     );
   }
 
-  bool load = false;
   bool isdarkmode = Get.isDarkMode;
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<GetUserDataController>();
+    final maincontroller = Get.find<MainController>();
     return Obx(() {
-      return load
+      return maincontroller.load.value
           ? const Loading()
           : Scaffold(
               appBar: AppBar(
@@ -69,7 +70,7 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(ProfilePage());
+                            Get.to(const ProfilePage());
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8),
@@ -141,8 +142,9 @@ class _SettingPageState extends State<SettingPage> {
                                           .textTheme
                                           .bodyText2!
                                           .copyWith(
-                                              color: Colors.blueGrey.shade200,
-                                              fontSize: 12),
+                                              color: Colors.blueGrey.shade600,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
@@ -186,7 +188,7 @@ class _SettingPageState extends State<SettingPage> {
                         // ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(AboutPage());
+                            Get.to(const AboutPage());
                           },
                           child: ItemCard(
                             title: 'À propos de nous',
@@ -207,42 +209,47 @@ class _SettingPageState extends State<SettingPage> {
                                   ),
                           ),
                         ),
-                        ItemCard(
-                          title: 'Contactez nous',
-                          color: Get.isDarkMode
-                              ? Colors.black26
-                              : Colors.grey.shade200,
-                          rightWidget: _arrow(),
-                          iconWidget: Get.isDarkMode
-                              ? Image.asset(
-                                  "assets/icons/light/contact.png",
-                                  height: 30,
-                                  width: 30,
-                                )
-                              : Image.asset(
-                                  "assets/icons/dark/contact.png",
-                                  height: 30,
-                                  width: 30,
-                                ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(const Staticmap());
+                          },
+                          child: ItemCard(
+                            title: 'Contactez nous',
+                            color: Get.isDarkMode
+                                ? Colors.black26
+                                : Colors.grey.shade200,
+                            rightWidget: _arrow(),
+                            iconWidget: Get.isDarkMode
+                                ? Image.asset(
+                                    "assets/icons/light/contact.png",
+                                    height: 30,
+                                    width: 30,
+                                  )
+                                : Image.asset(
+                                    "assets/icons/dark/contact.png",
+                                    height: 30,
+                                    width: 30,
+                                  ),
+                          ),
                         ),
-                        ItemCard(
-                          title: 'Aides',
-                          color: Get.isDarkMode
-                              ? Colors.black26
-                              : Colors.grey.shade200,
-                          rightWidget: Container(),
-                          iconWidget: Get.isDarkMode
-                              ? Image.asset(
-                                  "assets/icons/light/aide.png",
-                                  height: 30,
-                                  width: 30,
-                                )
-                              : Image.asset(
-                                  "assets/icons/dark/aide.png",
-                                  height: 30,
-                                  width: 30,
-                                ),
-                        ),
+                        // ItemCard(
+                        //   title: 'Aides',
+                        //   color: Get.isDarkMode
+                        //       ? Colors.black26
+                        //       : Colors.grey.shade200,
+                        //   rightWidget: Container(),
+                        //   iconWidget: Get.isDarkMode
+                        //       ? Image.asset(
+                        //           "assets/icons/light/aide.png",
+                        //           height: 30,
+                        //           width: 30,
+                        //         )
+                        //       : Image.asset(
+                        //           "assets/icons/dark/aide.png",
+                        //           height: 30,
+                        //           width: 30,
+                        //         ),
+                        // ),
                         ItemCard(
                           title: 'Mode Sombre',
                           color: Get.isDarkMode
@@ -276,18 +283,14 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            setState(() {
-                              load = true;
-                            });
+                            maincontroller.load.value = true;
                             Apiservices().logout().then((check) {
-                              setState(() {
-                                load = false;
-                              });
+                              maincontroller.load.value = false;
                               if (check![0]) {
                                 const Loading();
                                 Fluttertoast.showToast(
                                     msg: "Deconnexion effectué");
-                                Get.to(const CheckAuth());
+                                Get.offAll(const CheckAuth());
                               }
                             });
                           },

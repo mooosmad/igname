@@ -5,19 +5,20 @@ import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:igname_li/controller/controller.dart';
 import 'package:igname_li/services/config.dart';
 import 'package:location/location.dart';
 import 'package:map_picker/map_picker.dart';
 import 'package:shimmer/shimmer.dart';
 
-class MyMap2 extends StatefulWidget {
-  const MyMap2({Key? key}) : super(key: key);
+class MyMapLivraison extends StatefulWidget {
+  const MyMapLivraison({Key? key}) : super(key: key);
 
   @override
-  State<MyMap2> createState() => _MyMap2State();
+  State<MyMapLivraison> createState() => _MyMapLivraisonState();
 }
 
-class _MyMap2State extends State<MyMap2> {
+class _MyMapLivraisonState extends State<MyMapLivraison> {
   GoogleMapController? controller;
   MapPickerController mapPickerController = MapPickerController();
   CameraPosition? cameraPositionLivraison;
@@ -69,6 +70,7 @@ class _MyMap2State extends State<MyMap2> {
 
   @override
   Widget build(BuildContext context) {
+    final maincontroller = Get.put(MainController());
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -202,6 +204,7 @@ class _MyMap2State extends State<MyMap2> {
               if (kDebugMode) {
                 print(cameraPositionLivraison!.target);
               }
+
               lieuLivraison = "${await Config().getNameOfQuartier(
                 cameraPositionLivraison!.target.latitude,
                 cameraPositionLivraison!.target.longitude,
@@ -209,9 +212,14 @@ class _MyMap2State extends State<MyMap2> {
                 cameraPositionLivraison!.target.latitude,
                 cameraPositionLivraison!.target.longitude,
               )}";
-
+              maincontroller.latLivraison.value =
+                  "${cameraPositionLivraison!.target.longitude}";
+              maincontroller.longLivraison.value =
+                  "${cameraPositionLivraison!.target.latitude}";
               if (kDebugMode) {
                 print(lieuLivraison);
+                print(maincontroller.latLivraison);
+                print(maincontroller.latLivraison);
               }
               Get.back(result: lieuLivraison);
             },

@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:igname_li/themes/theme.dart';
 import 'package:igname_li/views/authviews/authentication.dart';
 import 'package:igname_li/views/home.dart';
-import 'package:igname_li/views/onboarding/onboarding.dart';
+import 'package:igname_li/views/onboarding/onboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late bool isFirst;
@@ -106,7 +106,7 @@ class _CheckAuthState extends State<CheckAuth> {
       child = const Home();
     } else {
       if (isFirst) {
-        child = const OnBoarding();
+        child = const OnboardingPageSimple();
       } else {
         child = const AuthenticationPage();
       }

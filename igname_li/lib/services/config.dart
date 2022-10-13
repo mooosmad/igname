@@ -16,8 +16,7 @@ class Config {
     List<geo.Placemark> placemarks =
         await geo.placemarkFromCoordinates(lat, long);
 
-    var quartier =
-        "${placemarks[0].locality!},${placemarks[0].street},${placemarks[0].subLocality!}";
+    var quartier = "${placemarks[0].locality!},${placemarks[0].subLocality!}";
     return quartier;
   }
 

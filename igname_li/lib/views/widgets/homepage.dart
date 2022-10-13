@@ -3,7 +3,6 @@
 import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:igname_li/controller/controller.dart';
 import 'package:igname_li/utils/shimmer.dart';
 import 'package:igname_li/views/widgets/camion.dart';
@@ -35,7 +34,7 @@ class _HomepageState extends State<Homepage> {
       width: 100,
     )
   ];
-  final List<Widget> view = [Moto(), Car(), Camion()];
+  final List<Widget> view = [const Moto(), const Car(), const Camion()];
   final List<String> titles = ["Moto", "Voiture", "Camion"];
   final options = const LiveOptions(
     // Start animation after (default zero)
@@ -61,13 +60,11 @@ class _HomepageState extends State<Homepage> {
     final controller = Get.find<GetUserDataController>();
     print("mon print perso ${controller.user.value}");
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 0,
-      ),
       body: Obx(() {
-        return controller.user.value != null
-            ? Container(
-                color: Get.isDarkMode ? Colors.black26 : Colors.grey.shade200,
+        return controller.user.value == null
+            ? const Shimmerload()
+            : SizedBox(
+                // color: Get.isDarkMode ? Colors.black26 : Colors.grey.shade200,
                 height: double.infinity,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -104,8 +101,7 @@ class _HomepageState extends State<Homepage> {
                     ],
                   ),
                 ),
-              )
-            : const Shimmerload();
+              );
       }),
     );
   }
@@ -124,7 +120,7 @@ class _HomepageState extends State<Homepage> {
       // And slide transition
       child: SlideTransition(
         position: Tween<Offset>(
-          begin: Offset(0, -0.1),
+          begin: const Offset(0, -0.1),
           end: Offset.zero,
         ).animate(animation),
         // Paste you Widget
